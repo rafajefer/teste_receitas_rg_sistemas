@@ -1,0 +1,58 @@
+services:
+
+  server:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: laravel
+    volumes:
+      - ./src:/var/www/html
+    depends_on:
+      - db
+    networks:
+      - teste_receitas_rg_sistemas
+
+  nginx:
+    image: nginx:latest
+    container_name: nginx
+    ports:
+      - "8000:80"
+    volumes:
+      - ./src:/var/www/html
+      - ./.docker/nginx/default.conf:/etc/nginx/conf.d/default.conf
+    depends_on:
+      - server
+    networks:
+      - teste_receitas_rg_sistemas
+
+  db:
+    image: mysql:8.0
+    container_name: db
+    restart: always
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE:-mydb}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./.docker/mysql:/var/lib/mysql
+    networks:
+      - teste_receitas_rg_sistemas
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    platform: linux/x86_64
+    restart: unless-stopped
+    container_name: phpmyadmin
+    ports:
+      - "8001:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD:-root}
+    networks:
+      - teste_receitas_rg_sistemas
+
+networks:
+  teste_receitas_rg_sistemas:
+    driver: bridge
