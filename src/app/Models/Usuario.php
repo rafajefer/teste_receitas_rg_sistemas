@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Usuario extends Model
 {
@@ -23,12 +24,19 @@ class Usuario extends Model
         'alterado_em',
     ];
 
-    public function setSenhaAttribute($value)
+    protected $hidden = ['senha'];
+
+    public function getAuthPassword(): string
+    {
+        return $this->senha;
+    }
+
+    public function setSenhaAttribute($value): void
     {
         $this->attributes['senha'] = bcrypt($value);
     }
 
-    public function receitas()
+    public function receitas(): HasMany
     {
         return $this->hasMany(Receita::class, 'id_usuarios', 'id');
     }
