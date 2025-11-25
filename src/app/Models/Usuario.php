@@ -27,4 +27,9 @@ class Usuario extends Model
     {
         $this->attributes['senha'] = bcrypt($value);
     }
+
+    public function receitas()
+    {
+        return $this->hasMany(Receita::class, 'id_usuarios', 'id');
+    }
 }
