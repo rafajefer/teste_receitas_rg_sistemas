@@ -1,0 +1,69 @@
+#!/bin/bash
+
+GREEN="\033[1;32m"
+RESET="\033[0m"
+
+# ---------- Help ----------
+if [ "$1" == "" ] ; then
+  echo -e "Usage:\n"
+  echo -e "  ${GREEN}$0 server${RESET}                          - start server"
+  echo -e "  ${GREEN}$0 server restart${RESET}                  - restart server"
+  echo -e "  ${GREEN}$0 tests [unit|feature] [TestFile.php]${RESET} - run tests (optionally one test file)"
+  echo -e "  ${GREEN}$0 coverage [unit|feature|all] [--no-open]${RESET} - run coverage"
+  exit 1
+fi
+
+# ---------- Server ----------
+if [ "$1" == "server" ] ; then
+    if [ "$2" == "restart" ]; then
+        docker compose down
+    fi
+    docker compose up -d
+    exit 0
+fi
+
+# ---------- Tests ----------
+if [ "$1" == "tests" ]; then
+    TEST_TYPE="$2"
+    SINGLE_TEST="$3"
+
+    # Define a pasta base de testes
+    case "$TEST_TYPE" in
+        unit) BASE_DIR="tests/Unit" ;;
+        feature) BASE_DIR="tests/Feature" ;;
+        *) BASE_DIR="tests" ;;
+    esac
+
+    # Roda um único teste se fornecido
+    if [ "$SINGLE_TEST" != "" ]; then
+        docker compose exec server ./vendor/bin/phpunit "$BASE_DIR/$SINGLE_TEST" --testdox
+    else
+        docker compose exec server ./vendor/bin/phpunit "$BASE_DIR" --testdox
+    fi
+    exit 0
+fi
+
+# ---------- Coverage ----------
+if [ "$1" == "coverage" ]; then
+    COVERAGE_DIR="/var/www/html/src/coverage"
+    mkdir -p src/coverage
+
+    TEST_TYPE="$2"
+    NO_OPEN=false
+    if [ "$3" == "--no-open" ] || [ "$2" == "--no-open" ]; then
+        NO_OPEN=true
+    fi
+
+    case "$TEST_TYPE" in
+        unit) docker compose exec server ./vendor/bin/phpunit tests/Unit --coverage-html $COVERAGE_DIR ;;
+        feature) docker compose exec server ./vendor/bin/phpunit tests/Feature --coverage-html $COVERAGE_DIR ;;
+        all|"") docker compose exec server ./vendor/bin/phpunit tests --coverage-html $COVERAGE_DIR ;;
+    esac
+
+    if [ "$NO_OPEN" = false ]; then
+        xdg-open src/coverage/index.html
+    else
+        echo "Coverage report generated in src/coverage/index.html"
+    fi
+    exit 0
+fi
