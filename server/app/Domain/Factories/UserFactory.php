@@ -10,9 +10,19 @@ final class UserFactory
     {
         return new UserEntity(
             id: $data['id'] ?? null,
-            name: $data['nome'],
+            name: $data['name'],
             login: $data['login'],
-            password: $data['senha']
+            password: $data['password']
+        );
+    }
+
+    public static function createFromDb(object $dto): UserEntity
+    {
+        return new UserEntity(
+            id: $dto->id,
+            name: $dto->nome,
+            login: $dto->login,
+            password: $dto->senha
         );
     }
 }

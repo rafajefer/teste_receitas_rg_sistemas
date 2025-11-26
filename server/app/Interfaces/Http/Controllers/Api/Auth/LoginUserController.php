@@ -17,13 +17,20 @@ final class LoginUserController extends Controller
                 login: $request->login,
                 password: $request->password,
             );
-
             $outputDTO = $useCase->execute($inputDTO);
             return response()->json($outputDTO, 200);
         } catch (InvalidCredentialsException $e) {
             return response()->json([
                 'error' => $e->getMessage(),
             ], 401);
+        } catch (\DomainException $e) {
+            return response()->json([
+                'error' => 'Erro de domínio: ' . $e->getMessage(),
+            ], 400);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'error' => 'Erro interno do servidor.',
+            ], 500);
         }
     }
 }

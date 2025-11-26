@@ -2,32 +2,33 @@
 
 namespace App\Application\UseCases\Auth;
 
-use App\DTOs\Auth\RegisterInput;
-use App\Domain\Repositories\UsuarioRepositoryInterface;
-use Illuminate\Support\Facades\Hash;
-use Carbon\Carbon;
+use App\Application\DTOs\Auth\RegisterUserInputDTO;
+use App\Application\DTOs\Auth\RegisterUserOutputDTO;
+use App\Domain\Factories\UserFactory;
+use App\Domain\Repositories\UserRepositoryInterface;
+use App\Domain\Services\Hash\HashServiceInterface;
 
 final class RegisterUserUseCase
 {
-    public function __construct(private UserRepositoryInterface $userRepo) {}
+    public function __construct(
+        private UserRepositoryInterface $userRepo,
+        private HashServiceInterface $hashService
+    ) {}
 
-    /**
-     * @return array{user:\App\Models\User, token:string}
-     */
-    public function execute(RegisterInput $input): array
+    public function execute(RegisterUserInputDTO $input): RegisterUserOutputDTO
     {
-        $now = Carbon::now();
-
-        $user = $this->userRepo->create([
+        $userEntity = UserFactory::createFromArray([
             'name' => $input->name,
             'login' => $input->login,
-            'password' => Hash::make($input->password),
-            'criado_em' => $now,
-            'alterado_em' => $now,
+            'password' => $this->hashService->make($input->password)
         ]);
 
-        $token = $user->createToken('api-token')->plainTextToken;
+        $user = $this->userRepo->create($userEntity);
 
-        return ['user' => $user, 'token' => $token];
+        return new RegisterUserOutputDTO(
+            id: $user->id,
+            name: $user->name,
+            login: $user->login
+        );
     }
 }

@@ -6,5 +6,6 @@ use App\Domain\Entities\UserEntity;
 
 interface UserRepositoryInterface
 {
-    public function findByLogin(string $login): ?UserEntity;
+    public function findByLogin(string $login): UserEntity;
+    public function create(UserEntity $user): UserEntity;
 }

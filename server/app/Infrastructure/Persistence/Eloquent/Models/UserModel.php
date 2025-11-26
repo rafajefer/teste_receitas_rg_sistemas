@@ -27,15 +27,15 @@ class UserModel extends Model
 
     protected $hidden = ['senha'];
 
-    public function getAuthPassword(): string
-    {
-        return $this->senha;
-    }
+    // public function getAuthPassword(): string
+    // {
+    //     return $this->senha;
+    // }
 
-    public function setSenhaAttribute($value): void
-    {
-        $this->attributes['senha'] = bcrypt($value);
-    }
+    // public function setSenhaAttribute($value): void
+    // {
+    //     $this->attributes['senha'] = bcrypt($value);
+    // }
 
     public function receitas(): HasMany
     {

@@ -11,4 +11,9 @@ final class LaravelHashService implements HashServiceInterface
     {
         return Hash::check($plain, $hashed);
     }
+
+    public function make(string $value): string
+    {
+        return Hash::make($value);
+    }
 }
