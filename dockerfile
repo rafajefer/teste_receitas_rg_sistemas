@@ -1,14 +1,21 @@
 FROM php:8.4-fpm
 
-# Ajustar UID/GID do www-data para o mesmo do usuário host (provável: 1000)
+# Ajustar UID/GID do www-data
 RUN usermod -u 1000 www-data && groupmod -g 1000 www-data
 
-# Instalar dependências do Laravel
+# Instalar dependências do Laravel e extensões necessárias
 RUN apt-get update && apt-get install -y \
     zip unzip git curl libpng-dev libjpeg-dev libfreetype6-dev \
     libxml2-dev libonig-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install pdo pdo_mysql mbstring xml gd
+    && docker-php-ext-install pdo pdo_mysql mbstring xml gd \
+    # Instalar Xdebug
+    && pecl install xdebug \
+    && docker-php-ext-enable xdebug
+
+# Configurar Xdebug para cobertura
+RUN echo "xdebug.mode=coverage" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini \
+    && echo "xdebug.start_with_request=yes" >> /usr/local/etc/php/conf.d/docker-php-ext-xdebug.ini
 
 # Instalar Composer
 COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
