@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Infrastructure\Persistence\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class Categoria extends Model
+class CategoriaModel extends Model
 {
     use HasFactory;
 
@@ -17,9 +17,8 @@ class Categoria extends Model
         'nome',
     ];
 
-
     public function receitas(): HasMany
     {
-        return $this->hasMany(Receita::class, 'id_categorias', 'id');
+        return $this->hasMany(ReceitaModel::class, 'id_categorias', 'id');
     }
 }

@@ -1,12 +1,12 @@
 <?php
 
-namespace App\Models;
+namespace App\Infrastructure\Persistence\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
-class Receita extends Model
+class ReceitaModel extends Model
 {
     use HasFactory;
 
@@ -30,11 +30,11 @@ class Receita extends Model
 
     public function usuario(): BelongsTo
     {
-        return $this->belongsTo(Usuario::class, 'id_usuarios', 'id');
+        return $this->belongsTo(UserModel::class, 'id_usuarios', 'id');
     }
 
     public function categoria(): BelongsTo
     {
-        return $this->belongsTo(Categoria::class, 'id_categorias', 'id');
+        return $this->belongsTo(CategoriaModel::class, 'id_categorias', 'id');
     }
 }
