@@ -1,14 +1,15 @@
 <?php
 
-namespace App\Models;
+namespace App\Infrastructure\Persistence\Eloquent\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Laravel\Sanctum\HasApiTokens;
 
-class Usuario extends Model
+class UserModel extends Model
 {
-    use HasFactory;
+    use HasFactory, HasApiTokens;
 
     protected $table = 'usuarios';
 
@@ -38,6 +39,6 @@ class Usuario extends Model
 
     public function receitas(): HasMany
     {
-        return $this->hasMany(Receita::class, 'id_usuarios', 'id');
+        return $this->hasMany(ReceitaModel::class, 'id_usuarios', 'id');
     }
 }

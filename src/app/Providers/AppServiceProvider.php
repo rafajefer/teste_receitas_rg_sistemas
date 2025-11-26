@@ -2,6 +2,12 @@
 
 namespace App\Providers;
 
+use App\Domain\Repositories\UserRepositoryInterface;
+use App\Domain\Services\Hash\HashServiceInterface;
+use App\Domain\Services\Token\TokenServiceInterface;
+use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentUserRepository;
+use App\Infrastructure\Services\Hash\LaravelHashService;
+use App\Infrastructure\Services\Token\SanctumTokenService;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -11,7 +17,9 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register(): void
     {
-        //
+        $this->app->bind(UserRepositoryInterface::class, EloquentUserRepository::class);
+        $this->app->bind(HashServiceInterface::class, LaravelHashService::class);
+        $this->app->bind(TokenServiceInterface::class, SanctumTokenService::class);
     }
 
     /**
