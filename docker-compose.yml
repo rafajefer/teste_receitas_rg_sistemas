@@ -1,12 +1,25 @@
 services:
+  client:
+    build:
+      context: ./client
+      dockerfile: Dockerfile
+    container_name: client
+    working_dir: /app
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    ports:
+      - "3000:3000"
+    networks:
+      - teste_receitas_rg_sistemas
 
   server:
     build:
-      context: .
+      context: ./server
       dockerfile: Dockerfile
     container_name: laravel
     volumes:
-      - ./src:/var/www/html
+      - ./server:/var/www/html
     depends_on:
       - db
     networks:
