@@ -15,9 +15,11 @@ class EloquentUserRepository implements UserRepositoryInterface
         if (!$userModel) {
             return null;
         }
-        $data = array_merge($userModel->toArray(), [
+        return UserFactory::createFromArray([
+            'id'    => $userModel->id,
+            'nome'  => $userModel->nome,
+            'login' => $userModel->login,
             'senha' => $userModel->getAuthPassword()
         ]);
-        return UserFactory::createFromArray($data);
     }
 }
