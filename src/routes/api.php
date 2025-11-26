@@ -7,4 +7,4 @@ Route::get('/ping', function () {
     return response()->json(['message' => 'pong']);
 });
 
-Route::post('/login', LoginUserController::class);
+Route::post('/auth/login', LoginUserController::class);
