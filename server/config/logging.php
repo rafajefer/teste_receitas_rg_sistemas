@@ -51,7 +51,10 @@ return [
     */
 
     'channels' => [
-
+        'database' => [
+            'driver' => 'custom',
+            'via' => App\Infrastructure\Logging\DatabaseLogHandler::class,
+        ],
         'stack' => [
             'driver' => 'stack',
             'channels' => explode(',', (string) env('LOG_STACK', 'single')),
