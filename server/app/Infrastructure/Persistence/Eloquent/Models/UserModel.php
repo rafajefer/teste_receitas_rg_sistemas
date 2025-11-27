@@ -39,6 +39,6 @@ class UserModel extends Model
 
     public function receitas(): HasMany
     {
-        return $this->hasMany(ReceitaModel::class, 'id_usuarios', 'id');
+        return $this->hasMany(RecipeModel::class, 'id_usuarios', 'id');
     }
 }
