@@ -5,11 +5,11 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class CategoriasSeeder extends Seeder
+class CategoriesSeeder extends Seeder
 {
     public function run(): void
     {
-        $categorias = [
+        $categories = [
             ['id' => 1, 'nome' => 'Bolos e tortas doces'],
             ['id' => 2, 'nome' => 'Carnes'],
             ['id' => 3, 'nome' => 'Aves'],
@@ -25,6 +25,6 @@ class CategoriasSeeder extends Seeder
             ['id' => 13, 'nome' => 'Alimentação Saudável'],
         ];
 
-        DB::table('categorias')->insert($categorias);
+        DB::table('categorias')->insert($categories);
     }
 }

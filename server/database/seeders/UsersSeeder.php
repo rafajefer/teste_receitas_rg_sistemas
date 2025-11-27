@@ -2,13 +2,13 @@
 
 namespace Database\Seeders;
 
-use App\Models\Usuario;
+use App\Infrastructure\Persistence\Eloquent\Models\UserModel;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
 
-class UsuariosSeeder extends Seeder
+class UsersSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -34,6 +34,6 @@ class UsuariosSeeder extends Seeder
             ],
         ]);
 
-        Usuario::factory()->count(5)->create();
+        UserModel::factory()->count(5)->create();
     }
 }

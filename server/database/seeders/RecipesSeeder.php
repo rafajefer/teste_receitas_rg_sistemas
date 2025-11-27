@@ -2,16 +2,16 @@
 
 namespace Database\Seeders;
 
-use App\Models\Receita;
+use App\Infrastructure\Persistence\Eloquent\Models\RecipeModel;
 use Illuminate\Database\Seeder;
 
-class ReceitasSeeder extends Seeder
+class RecipesSeeder extends Seeder
 {
     /**
      * Run the database seeds.
      */
     public function run(): void
     {
-        Receita::factory()->count(30)->create();
+        RecipeModel::factory()->count(30)->create();
     }
 }

@@ -1,27 +1,25 @@
 <?php
 
-namespace Database\Factories;
+namespace Database\Factories\Infrastructure\Persistence\Eloquent\Models;
 
-use App\Models\Categoria;
-use App\Models\Usuario;
+use App\Infrastructure\Persistence\Eloquent\Models\CategoryModel;
+use App\Infrastructure\Persistence\Eloquent\Models\RecipeModel;
+use App\Infrastructure\Persistence\Eloquent\Models\UserModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Receita>
  */
-class ReceitaFactory extends Factory
+class RecipeModelFactory extends Factory
 {
-    /**
-     * Define the model's default state.
-     *
-     * @return array<string, mixed>
-     */
+    protected $model = RecipeModel::class;
+
     public function definition(): array
     {
         return [
-            'id_usuarios'   => Usuario::inRandomOrder()->first()->id,  
+            'id_usuarios'   => UserModel::inRandomOrder()->first()->id,  
             'id_categorias' => rand(0, 1)
-                ? Categoria::inRandomOrder()->first()->id
+                ? CategoryModel::inRandomOrder()->first()->id
                 : null,
             'nome' => $this->faker->unique()->sentence(3),
             'tempo_preparo_minutos' => $this->faker->numberBetween(5, 120),

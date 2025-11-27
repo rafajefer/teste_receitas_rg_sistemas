@@ -35,6 +35,6 @@ class RecipeModel extends Model
 
     public function categoria(): BelongsTo
     {
-        return $this->belongsTo(CategoriaModel::class, 'id_categorias', 'id');
+        return $this->belongsTo(CategoryModel::class, 'id_categorias', 'id');
     }
 }
