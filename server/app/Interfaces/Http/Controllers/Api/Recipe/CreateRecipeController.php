@@ -34,7 +34,7 @@ class CreateRecipeController extends Controller
             ], 400);
         } catch (\Throwable $e) {
             return response()->json([
-                'error' => 'Erro interno do servidor.',
+                'error' => 'Erro interno do servidor.'
             ], 500);
         }
     }

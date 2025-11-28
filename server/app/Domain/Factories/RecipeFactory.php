@@ -15,10 +15,10 @@ final class RecipeFactory
             title: $data->nome,
             preparationTimeMinutes: $data->tempo_preparo_minutos,
             servings: $data->porcoes,
-            ingredients: $data->ingredientes,
-            steps: $data->modo_preparo,
+            ingredients: json_decode($data->ingredientes, true),
+            steps: json_decode($data->modo_preparo, true),
             user: new UserSummary($data->usuario->id, $data->usuario->nome),
-            category: new CategorySummary($data->categoria->id, $data->categoria->nome)
+            category: new CategorySummary($data->categoria?->id, $data->categoria?->nome)
         );
     }
 
