@@ -2,8 +2,8 @@
 
 namespace App\Domain\Repositories;
 
-use App\Domain\Entities\RecipeEntity;
 use App\Application\DTOs\Recipe\ListRecipesFilterInputDTO;
+use App\Domain\Entities\RecipeEntity;
 
 interface RecipeRepositoryInterface
 {
@@ -16,4 +16,6 @@ interface RecipeRepositoryInterface
     public function all(ListRecipesFilterInputDTO $filter): array;
 
     public function update(RecipeEntity $recipe): RecipeEntity;
+
+    public function delete(string $id): void;
 }
