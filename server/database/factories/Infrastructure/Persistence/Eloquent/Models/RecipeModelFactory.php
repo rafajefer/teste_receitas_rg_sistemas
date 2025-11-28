@@ -25,8 +25,8 @@ class RecipeModelFactory extends Factory
             'tempo_preparo_minutos' => $this->faker->numberBetween(5, 120),
             'porcoes' => $this->faker->numberBetween(1, 10),
 
-            'modo_preparo' => $this->faker->paragraph(3),
-            'ingredientes' => $this->faker->paragraph(2),
+            'modo_preparo' => json_encode([$this->faker->paragraph(3)]),
+            'ingredientes' => json_encode([$this->faker->paragraph(2)]),
 
             'criado_em' => now(),
             'alterado_em' => now(),
