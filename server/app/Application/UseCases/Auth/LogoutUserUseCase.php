@@ -2,18 +2,16 @@
 
 namespace App\Application\UseCases\Auth;
 
-use App\Models\Usuario;
+use App\Domain\Services\Token\TokenServiceInterface;
 
 final class LogoutUserUseCase
 {
-    public function execute(Usuario $usuario): bool
+    public function __construct(
+        private TokenServiceInterface $tokenService
+    ) {}
+
+    public function execute(string $tokenId)
     {
-        // remove apenas o token atual
-        $usuario->currentAccessToken()?->delete();
-
-        // ou para revogar todos:
-        // $usuario->tokens()->delete();
-
-        return true;
+        $this->tokenService->revokeCurrentToken($tokenId);
     }
 }

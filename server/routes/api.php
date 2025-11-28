@@ -1,6 +1,7 @@
 <?php
 
 use App\Interfaces\Http\Controllers\Api\Auth\LoginUserController;
+use App\Interfaces\Http\Controllers\Api\Auth\LogoutUserController;
 use App\Interfaces\Http\Controllers\Api\Auth\RegisterUserController;
 use App\Interfaces\Http\Controllers\Api\Recipe\CreateRecipeController;
 use App\Interfaces\Http\Controllers\Api\Recipe\EditRecipeController;
@@ -15,6 +16,7 @@ Route::get('/ping', function () {
 
 Route::post('/auth/login', LoginUserController::class)->name('login');
 Route::post('/auth/register', RegisterUserController::class)->name('register');
+Route::middleware('auth:sanctum')->post('/auth/logout', LogoutUserController::class)->name('logout');
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -25,5 +27,3 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/recipes/{id}/print', PrintRecipeController::class)->name('recipes.print');
 });
 
-
-// Route::post('/auth/logout', LogoutUserController::class)->name('logout');

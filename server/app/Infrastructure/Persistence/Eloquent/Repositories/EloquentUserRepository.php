@@ -11,6 +11,16 @@ use App\Infrastructure\Persistence\Eloquent\Models\UserModel;
 
 class EloquentUserRepository implements UserRepositoryInterface
 {
+    public function findById(string $id): UserEntity
+    {
+        $userModel = UserModel::find($id);
+        if (!$userModel) {
+            throw new UserNotFoundException();
+        }
+
+        return UserFactory::createFromDb($userModel);
+    }
+
     public function findByLogin(string $login): UserEntity
     {
         $userModel = UserModel::where('login', $login)->first();

@@ -19,4 +19,15 @@ final class SanctumTokenService implements TokenServiceInterface
         $user = $this->userModel->find($userId);
         return $user->createToken('auth')->plainTextToken;
     }
+
+    public function revokeCurrentToken(int $tokenId): void
+    {
+        \Laravel\Sanctum\PersonalAccessToken::find($tokenId)?->delete();
+    }
+
+    public function revokeAllTokens(int $userId): void
+    {
+        $user = $this->userModel->find($userId);
+        $user->tokens()->delete();
+    }
 }
