@@ -6,6 +6,7 @@ use App\Interfaces\Http\Controllers\Api\Recipe\CreateRecipeController;
 use App\Interfaces\Http\Controllers\Api\Recipe\EditRecipeController;
 use App\Interfaces\Http\Controllers\Api\Recipe\DeleteRecipeController;
 use App\Interfaces\Http\Controllers\Api\Recipe\ListRecipeController;
+use App\Interfaces\Http\Controllers\Api\Recipe\PrintRecipeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () {
@@ -21,6 +22,7 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('/recipes', ListRecipeController::class)->name('recipes.index');
     Route::put('/recipes/{id}', EditRecipeController::class)->name('recipes.update');
     Route::delete('/recipes/{id}', DeleteRecipeController::class)->name('recipes.delete');
+    Route::get('/recipes/{id}/print', PrintRecipeController::class)->name('recipes.print');
 });
 
 

@@ -18,4 +18,6 @@ interface RecipeRepositoryInterface
     public function update(RecipeEntity $recipe): RecipeEntity;
 
     public function delete(string $id): void;
+
+    public function findById(string $id): RecipeEntity;
 }

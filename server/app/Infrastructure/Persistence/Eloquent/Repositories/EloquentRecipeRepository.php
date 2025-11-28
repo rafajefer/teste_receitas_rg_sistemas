@@ -66,4 +66,10 @@ class EloquentRecipeRepository implements RecipeRepositoryInterface
         $recipeModel = RecipeModel::findOrFail($id);
         $recipeModel->delete();
     }
+
+    public function findById(string $id): RecipeEntity
+    {
+        $recipeModel = RecipeModel::with(['usuario', 'categoria'])->findOrFail($id);
+        return RecipeFactory::createFromDb($recipeModel);
+    }
 }

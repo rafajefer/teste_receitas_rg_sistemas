@@ -2,6 +2,8 @@
 
 namespace App\Providers;
 
+use App\Application\UseCases\PrintRecipeUseCase;
+use App\Application\UseCases\PrintRecipeUseCaseInterface;
 use App\Application\UseCases\Recipe\DeleteRecipeUseCase;
 use App\Application\UseCases\Recipe\DeleteRecipeUseCaseInterface;
 use App\Application\UseCases\Recipe\EditRecipeUseCase;
@@ -30,6 +32,7 @@ class AppServiceProvider extends ServiceProvider
         $this->app->bind(ListRecipesUseCaseInterface::class, ListRecipesUseCase::class);
         $this->app->bind(EditRecipeUseCaseInterface::class, EditRecipeUseCase::class);
         $this->app->bind(DeleteRecipeUseCaseInterface::class, DeleteRecipeUseCase::class);
+        $this->app->bind(PrintRecipeUseCaseInterface::class, PrintRecipeUseCase::class);
 
         $this->app->bind(HashServiceInterface::class, LaravelHashService::class);
         $this->app->bind(TokenServiceInterface::class, SanctumTokenService::class);
