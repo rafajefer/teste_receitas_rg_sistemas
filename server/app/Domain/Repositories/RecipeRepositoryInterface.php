@@ -14,4 +14,6 @@ interface RecipeRepositoryInterface
      * @return RecipeEntity[]
      */
     public function all(ListRecipesFilterInputDTO $filter): array;
+
+    public function update(RecipeEntity $recipe): RecipeEntity;
 }

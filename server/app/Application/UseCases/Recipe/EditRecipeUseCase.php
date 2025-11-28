@@ -2,41 +2,40 @@
 
 namespace App\Application\UseCases\Recipe;
 
-use App\Application\DTOs\Recipe\CreateRecipeInputDTO;
-use App\Application\DTOs\Recipe\CreateRecipeOutputDTO;
+use App\Application\DTOs\Recipe\EditRecipeInputDTO;
+use App\Application\DTOs\Recipe\EditRecipeOutputDTO;
 use App\Domain\Factories\RecipeFactory;
 use App\Domain\Repositories\RecipeRepositoryInterface;
 
-class CreateRecipeUseCase
+final class EditRecipeUseCase implements EditRecipeUseCaseInterface
 {
     public function __construct(
         private RecipeRepositoryInterface $recipeRepository
     ) {}
 
-    public function execute(CreateRecipeInputDTO $dto): CreateRecipeOutputDTO
+    public function execute(EditRecipeInputDTO $dto): EditRecipeOutputDTO
     {
-        $recipeEntity = RecipeFactory::createForPost(
-            id: 0,
+        $recipeEntity = RecipeFactory::createForPut(
+            id: $dto->id,
             title: $dto->title,
             preparationTimeMinutes: $dto->preparationTimeMinutes,
             servings: $dto->servings,
             ingredients: $dto->ingredients,
             steps: $dto->steps,
-            userId: $dto->userId,
             categoryId: $dto->categoryId
         );
 
-        $recipe = $this->recipeRepository->create($recipeEntity);
+        $recipe = $this->recipeRepository->update($recipeEntity);
 
-        return new CreateRecipeOutputDTO(
+        return new EditRecipeOutputDTO(
             id: $recipe->id,
             title: $recipe->title,
-            preparationTimeMinutes: $recipe->preparationTimeMinutes,
+            preparation_time_minutes: $recipe->preparationTimeMinutes,
             servings: $recipe->servings,
             ingredients: $recipe->ingredients,
             steps: $recipe->steps,
-            userId: $recipe->user->id,
-            categoryId: $recipe->category->id
+            user_id: $recipe->user->id,
+            category_id: $recipe->category->id
         );
     }
 }

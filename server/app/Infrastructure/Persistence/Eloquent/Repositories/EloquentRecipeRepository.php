@@ -26,6 +26,23 @@ class EloquentRecipeRepository implements RecipeRepositoryInterface
 
         return RecipeFactory::createFromDb($recipeModel);
     }
+
+    public function update(RecipeEntity $recipe): RecipeEntity
+    {
+        $recipeModel = RecipeModel::findOrFail($recipe->id);
+        $recipeModel->nome = $recipe->title;
+        $recipeModel->tempo_preparo_minutos = $recipe->preparationTimeMinutes;
+        $recipeModel->porcoes = $recipe->servings;
+        $recipeModel->ingredientes = json_encode($recipe->ingredients ?? []);
+        $recipeModel->modo_preparo = json_encode($recipe->steps ?? []);
+        $recipeModel->id_categorias = $recipe->category->id;
+        $recipeModel->save();
+
+        $recipeModel = RecipeModel::with(['usuario', 'categoria'])->find($recipeModel->id);
+
+        return RecipeFactory::createFromDb($recipeModel);
+    }
+    
     /**
      * @param \App\Application\DTOs\Recipe\ListRecipesFilterInputDTO $filter
      * @return RecipeEntity[]

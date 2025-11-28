@@ -22,7 +22,7 @@ final class RecipeFactory
         );
     }
 
-    public static function createForWrite(
+    public static function createForPost(
         string $id,
         ?string $title,
         ?int $preparationTimeMinutes,
@@ -40,6 +40,27 @@ final class RecipeFactory
             ingredients: $ingredients,
             steps: $steps,
             user: new UserSummary($userId, ''),
+            category: new CategorySummary($categoryId, '')
+        );
+    }
+
+    public static function createForPut(
+        string $id,
+        ?string $title,
+        ?int $preparationTimeMinutes,
+        ?int $servings,
+        ?array $ingredients,
+        array $steps,
+        ?string $categoryId
+    ): RecipeEntity {
+        return new RecipeEntity(
+            id: $id,
+            title: $title,
+            preparationTimeMinutes: $preparationTimeMinutes,
+            servings: $servings,
+            ingredients: $ingredients,
+            steps: $steps,
+            user: new UserSummary('', ''),
             category: new CategorySummary($categoryId, '')
         );
     }

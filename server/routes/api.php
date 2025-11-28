@@ -1,9 +1,9 @@
 <?php
 
 use App\Interfaces\Http\Controllers\Api\Auth\LoginUserController;
-use App\Interfaces\Http\Controllers\Api\Auth\LogoutUserController;
 use App\Interfaces\Http\Controllers\Api\Auth\RegisterUserController;
 use App\Interfaces\Http\Controllers\Api\Recipe\CreateRecipeController;
+use App\Interfaces\Http\Controllers\Api\Recipe\ListRecipeController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/ping', function () {
@@ -14,8 +14,12 @@ Route::post('/auth/login', LoginUserController::class)->name('login');
 Route::post('/auth/register', RegisterUserController::class)->name('register');
 
 
+use App\Interfaces\Http\Controllers\Api\Recipe\EditRecipeController;
+
 Route::middleware('auth:sanctum')->group(function () {
     Route::post('/recipes', CreateRecipeController::class)->name('recipes.store');
+    Route::get('/recipes', ListRecipeController::class)->name('recipes.index');
+    Route::put('/recipes/{id}', EditRecipeController::class)->name('recipes.update');
 });
 
 
