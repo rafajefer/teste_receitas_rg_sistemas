@@ -7,10 +7,11 @@ use App\Application\UseCases\Recipe\CreateRecipeUseCase;
 use App\Domain\Exceptions\InvalidCredentialsException;
 use App\Interfaces\Http\Controllers\Controller;
 use App\Interfaces\Http\Requests\Recipe\CreateRecipeRequest;
+use Illuminate\Http\JsonResponse;
 
 class CreateRecipeController extends Controller
 {
-    public function __invoke(CreateRecipeRequest $request, CreateRecipeUseCase $useCase)
+    public function __invoke(CreateRecipeRequest $request, CreateRecipeUseCase $useCase): JsonResponse
     {
         try {
             $inputDTO = new CreateRecipeInputDTO(
