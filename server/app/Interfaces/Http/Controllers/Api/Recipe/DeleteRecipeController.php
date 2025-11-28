@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Http\Controllers\Api\Recipe;
 
-use App\Application\UseCases\DeleteRecipeUseCaseInterface;
+use App\Application\UseCases\Recipe\DeleteRecipeUseCaseInterface;
 use App\Interfaces\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 

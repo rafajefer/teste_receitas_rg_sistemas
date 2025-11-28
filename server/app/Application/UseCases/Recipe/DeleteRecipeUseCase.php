@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Application\UseCases;
+namespace App\Application\UseCases\Recipe;
 
 use App\Domain\Repositories\RecipeRepositoryInterface;
 

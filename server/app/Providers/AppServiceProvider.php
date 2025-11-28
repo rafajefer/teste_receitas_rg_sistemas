@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
-use App\Application\UseCases\DeleteRecipeUseCase;
-use App\Application\UseCases\DeleteRecipeUseCaseInterface;
-use App\Application\UseCases\ListRecipesUseCase;
-use App\Application\UseCases\ListRecipesUseCaseInterface;
+use App\Application\UseCases\Recipe\DeleteRecipeUseCase;
+use App\Application\UseCases\Recipe\DeleteRecipeUseCaseInterface;
 use App\Application\UseCases\Recipe\EditRecipeUseCase;
 use App\Application\UseCases\Recipe\EditRecipeUseCaseInterface;
+use App\Application\UseCases\Recipe\ListRecipesUseCase;
+use App\Application\UseCases\Recipe\ListRecipesUseCaseInterface;
 use App\Domain\Repositories\RecipeRepositoryInterface;
 use App\Domain\Repositories\UserRepositoryInterface;
 use App\Domain\Services\Hash\HashServiceInterface;

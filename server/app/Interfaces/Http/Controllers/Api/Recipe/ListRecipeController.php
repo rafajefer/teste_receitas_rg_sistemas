@@ -2,8 +2,8 @@
 
 namespace App\Interfaces\Http\Controllers\Api\Recipe;
 
-use App\Application\UseCases\ListRecipesUseCaseInterface;
 use App\Application\DTOs\Recipe\ListRecipesFilterInputDTO;
+use App\Application\UseCases\Recipe\ListRecipesUseCaseInterface;
 use App\Interfaces\Http\Controllers\Controller;
 use App\Interfaces\Http\Requests\Recipe\ListRecipeRequest;
 use Illuminate\Http\JsonResponse;
