@@ -15,7 +15,7 @@ class LoginUserControllerTest extends TestCase
         UserModel::create([
             'nome' => 'Rafael',
             'login' => 'rafael123',
-            'senha' => 'senhaSegura',
+            'senha' => bcrypt('senhaSegura'),
         ]);
 
         $response = $this->postJson('/api/auth/login', [
@@ -32,7 +32,7 @@ class LoginUserControllerTest extends TestCase
         UserModel::create([
             'nome' => 'Rafael',
             'login' => 'rafael123',
-            'senha' => 'senhaSegura',
+            'senha' => bcrypt('senhaSegura'),
         ]);
 
         $response = $this->postJson('/api/auth/login', [
