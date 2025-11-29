@@ -45,8 +45,8 @@ fi
 
 # ---------- Coverage ----------
 if [ "$1" == "coverage" ]; then
-    COVERAGE_DIR="/var/www/html/src/coverage"
-    mkdir -p src/coverage
+    COVERAGE_DIR="/var/www/html/coverage"
+    mkdir -p coverage
 
     TEST_TYPE="$2"
     NO_OPEN=false
@@ -61,9 +61,9 @@ if [ "$1" == "coverage" ]; then
     esac
 
     if [ "$NO_OPEN" = false ]; then
-        xdg-open src/coverage/index.html
+        xdg-open server/coverage/index.html
     else
-        echo "Coverage report generated in src/coverage/index.html"
+        echo "Coverage report generated in server/coverage/index.html"
     fi
     exit 0
 fi
