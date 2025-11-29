@@ -2,7 +2,7 @@
 
 namespace App\Interfaces\Http\Controllers\Api\Recipe;
 
-use App\Application\UseCases\PrintRecipeUseCaseInterface;
+use App\Application\UseCases\Recipe\PrintRecipeUseCaseInterface;
 use App\Interfaces\Http\Controllers\Controller;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Http\Response;
