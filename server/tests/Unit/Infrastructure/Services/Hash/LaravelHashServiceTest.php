@@ -4,7 +4,7 @@ namespace Tests\Unit\Infrastructure\Services\Hash;
 
 use App\Infrastructure\Services\Hash\LaravelHashService;
 use Illuminate\Support\Facades\Hash;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 final class LaravelHashServiceTest extends TestCase
 {
