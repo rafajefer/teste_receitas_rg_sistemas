@@ -7,6 +7,7 @@ use App\Application\DTOs\Auth\LoginOutputDTO;
 use App\Application\UseCases\Auth\LoginUserUseCase;
 use App\Domain\Entities\UserEntity;
 use App\Domain\Exceptions\InvalidCredentialsException;
+use App\Domain\Exceptions\UserNotFoundException;
 use App\Domain\Repositories\UserRepositoryInterface;
 use App\Domain\Services\Hash\HashServiceInterface;
 use App\Domain\Services\Token\TokenServiceInterface;
@@ -100,16 +101,16 @@ class LoginUserUseCaseTest extends TestCase
     public function test_it_should_throw_exception_when_user_does_not_exist(): void
     {
         $input = new LoginInputDTO(
-            login: 'ghost',
+            login: 'rafael',
             password: '123'
         );
 
         $this->userRepo
             ->method('findByLogin')
-            ->with('ghost')
-            ->willReturn(null);
+            ->with('rafael')
+            ->willThrowException(new UserNotFoundException());
 
-        $this->expectException(InvalidCredentialsException::class);
+        $this->expectException(UserNotFoundException::class);
 
         $this->useCase->execute($input);
     }
