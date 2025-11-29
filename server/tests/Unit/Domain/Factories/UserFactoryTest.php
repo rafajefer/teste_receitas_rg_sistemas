@@ -20,7 +20,7 @@ class UserFactoryTest extends TestCase
         $user = UserFactory::createFromDb($dto);
 
         $this->assertInstanceOf(UserEntity::class, $user);
-        $this->assertEquals(2, $user->id);
+        $this->assertEquals('2', $user->id);
         $this->assertEquals('Maria', $user->name);
         $this->assertEquals('maria456', $user->login);
         $this->assertEquals('senhaSuperSegura', $user->password);
@@ -56,7 +56,7 @@ class UserFactoryTest extends TestCase
         $user = UserFactory::createFromArray($data);
 
         $this->assertInstanceOf(UserEntity::class, $user);
-        $this->assertEquals(1, $user->id);
+        $this->assertEquals('1', $user->id);
         $this->assertEquals('Rafael', $user->name);
         $this->assertEquals('rafael123', $user->login);
         $this->assertEquals('senhaSegura', $user->password);
