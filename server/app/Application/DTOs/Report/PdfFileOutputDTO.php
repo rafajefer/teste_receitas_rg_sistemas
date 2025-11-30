@@ -2,7 +2,7 @@
 
 namespace App\Application\DTOs\Report;
 
-final class PdfFileDTO
+final class PdfFileOutputDTO
 {
     public function __construct(
         public string $content,

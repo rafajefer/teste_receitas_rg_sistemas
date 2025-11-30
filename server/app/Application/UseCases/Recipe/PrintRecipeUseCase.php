@@ -2,27 +2,24 @@
 
 namespace App\Application\UseCases\Recipe;
 
-use App\Application\DTOs\Recipe\PrintRecipeOutputDTO;
+use App\Application\DTOs\Report\PdfFileOutputDTO;
 use App\Domain\Repositories\RecipeRepositoryInterface;
+use App\Domain\Services\PdfGenerator\PdfGenerationServiceInterface;
 
 final class PrintRecipeUseCase implements PrintRecipeUseCaseInterface
 {
     public function __construct(
-        private RecipeRepositoryInterface $recipeRepository
+        private RecipeRepositoryInterface $recipeRepository,
+        private PdfGenerationServiceInterface $pdfGenerationService
     ) {}
 
-    public function execute(string $id): PrintRecipeOutputDTO
+    public function execute(string $id): PdfFileOutputDTO
     {
         $recipe = $this->recipeRepository->findById($id);
-        return new PrintRecipeOutputDTO(
-            id: $recipe->id,
-            title: $recipe->title,
-            preparationTimeMinutes: $recipe->preparationTimeMinutes,
-            servings: $recipe->servings,
-            ingredients: $recipe->ingredients,
-            steps: $recipe->steps,
-            userName: $recipe->user->name,
-            categoryName: $recipe->category->name
+        return $this->pdfGenerationService->generate(
+            data: ['recipe' => $recipe],
+            view: 'recipes.print',
+            filename: 'recipe_' . $recipe->id . '.pdf'
         );
     }
 }
