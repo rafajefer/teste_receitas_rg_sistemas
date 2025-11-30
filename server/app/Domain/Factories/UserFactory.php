@@ -9,7 +9,7 @@ final class UserFactory
     public static function createFromArray(array $data): UserEntity
     {
         return new UserEntity(
-            id: $data['id'] ?? null,
+            id: (string) ($data['id'] ?? ''),
             name: $data['name'],
             login: $data['login'],
             password: $data['password']
@@ -19,7 +19,7 @@ final class UserFactory
     public static function createFromDb(object $dto): UserEntity
     {
         return new UserEntity(
-            id: $dto->id,
+            id: (string) ($dto->id ?? ''),
             name: $dto->nome,
             login: $dto->login,
             password: $dto->senha
