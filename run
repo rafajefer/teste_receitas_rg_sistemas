@@ -8,7 +8,7 @@ if [ "$1" == "" ] ; then
   echo -e "Usage:\n"
   echo -e "  ${GREEN}$0 install${RESET}                         - install dependencies for project (client and server)"
   echo -e "  ${GREEN}$0 start${RESET}                           - start project (client and server)"
-  echo -e "  ${GREEN}$0 server${RESET}                          - start server"
+  echo -e "  ${GREEN}$0 stop${RESET}                            - stop project (client and server)"
   echo -e "  ${GREEN}$0 server restart${RESET}                  - restart server"
   echo -e "  ${GREEN}$0 tests [unit|feature] [TestFile.php]${RESET} - run tests (optionally one test file)"
   echo -e "  ${GREEN}$0 coverage [unit|feature|all] [--no-open]${RESET} - run coverage"
@@ -44,6 +44,14 @@ if [ "$1" == "start" ] ; then
     echo -e "${GREEN}Docker containers started successfully.${RESET}\n"
     echo -e "You can access the client at: ${GREEN}http://localhost:3000${RESET}\n"
     echo -e "You can access the server at: ${GREEN}http://localhost:8000${RESET}\n"
+    exit 0
+fi
+
+# ---------- stop ----------
+if [ "$1" == "stop" ] ; then
+    echo -e "${GREEN}Stopping Docker containers...${RESET}"
+    docker compose down
+    echo -e "${GREEN}Docker containers stopped successfully.${RESET}\n"
     exit 0
 fi
 
