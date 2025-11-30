@@ -109,10 +109,107 @@ O relatório estará disponível em `server/coverage/index.html`.
 
 ## Scripts Úteis
 
-- Instalar dependências: `./run install`
-- Iniciar projeto: `./run start`
-- Rodar testes: `./run tests`
-- Gerar cobertura: `./run coverage`
+
+- **Instalar dependências e containers:**
+	```bash
+	./run install
+	```
+- **Iniciar projeto (client, server, nginx, db):**
+	```bash
+	./run start
+	```
+- **Rodar todos os testes:**
+	```bash
+	./run tests
+	```
+- **Rodar todos os testes unitários:**
+	```bash
+	./run tests unit
+	```
+- **Rodar todos os testes de integração (feature):**
+	```bash
+	./run tests feature
+	```
+- **Rodar teste unitário de uma classe específica:**
+	```bash
+	./run tests unit Application/UseCases/Recipe/ListRecipesUseCaseTest.php
+	```
+- **Rodar teste de integração de uma classe específica:**
+	```bash
+	./run tests feature Interfaces/Http/Controllers/Api/Auth/LoginUserControllerTest.php
+	```
+- **Gerar relatório de cobertura de testes:**
+	```bash
+	./run coverage
+	```
+- **Gerar cobertura apenas de testes unitários:**
+	```bash
+	./run coverage unit
+	```
+- **Gerar cobertura apenas de testes de integração:**
+	```bash
+	./run coverage feature
+	```
+- **Abrir relatório de cobertura no navegador:**
+	```bash
+	./run coverage
+	# O relatório estará disponível em server/coverage/index.html
+	```
+
+## Comandos docker Úteis
+
+Execute esses comandos no diretório raiz do projeto:
+
+- **Acessar o container do client:**
+	```bash
+	docker compose exec client bash
+	```
+- **Acessar o container do server:**
+	```bash
+	docker compose exec server bash
+	```
+- **Acessar o log do container do client:**
+	```bash
+	docker compose logs client --tail=200
+	```
+- **Migrar banco de dados:**
+	```bash
+	docker compose exec server php artisan migrate
+	```
+- **Migrar e popular banco de dados:**
+	```bash
+	docker compose exec server php artisan migrate:fresh --seed
+	```
+- **Limpar e cachear configurações:**
+	```bash
+	docker compose exec server php artisan config:cache
+	```
+- **Instalar dependência no client (exemplo com moment):**
+	```bash
+	docker compose exec client npm install moment
+	```
+- **Instalar dependência no server (exemplo com barryvdh/laravel-dompdf):**
+	```bash
+	docker compose exec server composer require barryvdh/laravel-dompdf
+	```
+- **Reiniciar containers:**
+	```bash
+	docker compose restart client
+	docker compose restart server
+	```
+- **Remover volumes e containers (limpeza total):**
+	```bash
+	docker compose down -v
+	```
+- **Verificar status dos containers:**
+	```bash
+	docker compose ps
+	```
+- **Solução de problemas de permissões:**
+	```bash
+	sudo chown -R $USER:$USER client/
+	sudo chown -R $USER:$USER server/
+	```
 
 ## Autor
 
