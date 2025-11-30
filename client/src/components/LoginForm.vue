@@ -3,7 +3,7 @@
     <h2 class="text-2xl font-bold mb-6 text-center">Login</h2>
     <form @submit.prevent="login">
       <div class="mb-4">
-        <label class="block text-gray-700 mb-2" for="login">Login</label>
+        <label class="block text-gray-700 mb-2 text-red" for="login">Login</label>
         <input v-model="loginField" id="login" type="text" class="w-full px-3 py-2 border rounded focus:outline-none focus:ring focus:border-blue-300" required />
       </div>
       <div class="mb-6">
@@ -31,8 +31,9 @@ export default {
       this.error = ''
       try {
         await this.$store.dispatch('auth/login', { login: this.loginField, password: this.password })
-        this.$router.push({ name: 'Home' })
+        this.$router?.replace?.({ name: 'Home' })
       } catch (e) {
+        console.log('Login error:', e)
         this.error = e.response?.data?.message || 'Erro ao autenticar.'
       }
     }
