@@ -1,70 +1,53 @@
-# .
+# todo-list
 
-This template should help get you started developing with Vue 3 in Vite.
 
-## Recommended IDE Setup
 
-[VS Code](https://code.visualstudio.com/) + [Vue (Official)](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Recommended Browser Setup
-
-- Chromium-based browsers (Chrome, Edge, Brave, etc.):
-  - [Vue.js devtools](https://chromewebstore.google.com/detail/vuejs-devtools/nhdogjmejiglipccpnnnanhbledajbpd) 
-  - [Turn on Custom Object Formatter in Chrome DevTools](http://bit.ly/object-formatters)
-- Firefox:
-  - [Vue.js devtools](https://addons.mozilla.org/en-US/firefox/addon/vue-js-devtools/)
-  - [Turn on Custom Object Formatter in Firefox DevTools](https://fxdx.dev/firefox-devtools-custom-object-formatters/)
-
-## Type Support for `.vue` Imports in TS
-
-TypeScript cannot handle type information for `.vue` imports by default, so we replace the `tsc` CLI with `vue-tsc` for type checking. In editors, we need [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) to make the TypeScript language service aware of `.vue` types.
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vite.dev/config/).
-
-## Project Setup
-
+### Passo a passo
+Clone Repositório
 ```sh
+git clone https://github.com/rafajefer/todo-list.git todo-list
+```
+```sh
+cd todo-list/vue3
+```
+
+### Buildando imagem e executando
+```sh
+docker build -t app-image:latest .
+docker run --rm -it --name app-container -p 3000:3000 -v $(pwd):/app app-image:latest bash
+```
+
+### Instale as dependências do projeto
+```sh
+cp .env.sample .env
 npm install
 ```
 
-### Compile and Hot-Reload for Development
+Utilize o CTRL D para sair
 
+### Inicie o client com vue3 com docker
 ```sh
-npm run dev
+docker compose up -d
 ```
 
-### Type-Check, Compile and Minify for Production
-
+Acesse o container app
 ```sh
-npm run build
+docker exec -it app bash
 ```
 
-### Run Unit Tests with [Vitest](https://vitest.dev/)
-
+### Para encerrar o client
 ```sh
-npm run test:unit
+docker compose down
 ```
 
-### Run End-to-End Tests with [Cypress](https://www.cypress.io/)
-
+### Para da permissão em arquivos/pastas
 ```sh
-npm run test:e2e:dev
+sudo chown $USER:$USER .
 ```
 
-This runs the end-to-end tests against the Vite development server.
-It is much faster than the production build.
 
-But it's still recommended to test the production build with `test:e2e` before deploying (e.g. in CI environments):
+Acesse o projeto
+[http://localhost:3000](http://localhost:3000)
 
-```sh
-npm run build
-npm run test:e2e
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Acessando api fake do projeto criada com json-server
+[http://localhost:5000/todos](http://localhost:5000/todos)

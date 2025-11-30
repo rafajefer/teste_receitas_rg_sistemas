@@ -10,9 +10,9 @@ services:
       - /app/node_modules
     ports:
       - "3000:3000"
+    command: npm run serve-docker
     networks:
       - teste_receitas_rg_sistemas
-
   server:
     build:
       context: ./server

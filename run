@@ -6,18 +6,39 @@ RESET="\033[0m"
 # ---------- Help ----------
 if [ "$1" == "" ] ; then
   echo -e "Usage:\n"
+  echo -e "  ${GREEN}$0 install${RESET}                         - install project (client and server)"
+  echo -e "  ${GREEN}$0 start${RESET}                           - start project (client and server)"
   echo -e "  ${GREEN}$0 server${RESET}                          - start server"
   echo -e "  ${GREEN}$0 server restart${RESET}                  - restart server"
   echo -e "  ${GREEN}$0 tests [unit|feature] [TestFile.php]${RESET} - run tests (optionally one test file)"
   echo -e "  ${GREEN}$0 coverage [unit|feature|all] [--no-open]${RESET} - run coverage"
   exit 1
 fi
+# ---------- Install ----------
+if [ "$1" == "install" ] ; then
+    echo -e "Installing project...\n"
 
-# ---------- Server ----------
-if [ "$1" == "server" ] ; then
-    if [ "$2" == "restart" ]; then
-        docker compose down
-    fi
+    echo -e "${GREEN}Building Docker containers...${RESET}"
+    docker compose up -d --build
+    echo -e "${GREEN}Docker containers built successfully.${RESET}\n"
+
+    echo -e "${GREEN}Installing server dependencies...${RESET}"
+    docker compose exec server composer install
+    echo -e "${GREEN}Server dependencies installed successfully.${RESET}\n"
+
+    echo -e "${GREEN}Installing client dependencies...${RESET}"
+    # docker compose exec client cp .env.sample .env
+    docker compose exec client npm install
+    echo -e "${GREEN}Client dependencies installed successfully.${RESET}\n"
+
+    echo -e "${GREEN}Project installed successfully!${RESET}\n"
+    echo -e "You can start the project by running:\n"
+    echo -e "  ${GREEN}$0 start${RESET}\n"
+    exit 0
+fi
+
+# ---------- start ----------
+if [ "$1" == "start" ] ; then
     docker compose up -d
     exit 0
 fi
