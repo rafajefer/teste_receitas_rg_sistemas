@@ -15,7 +15,7 @@ class CreateRecipeRequest extends FormRequest
     {
         return [
             'title' => 'nullable|string|max:45|unique:receitas,nome',
-            'preparation_time_minutes' => 'nullable|integer|min:0',
+            'preparationTimeMinutes' => 'nullable|integer|min:0',
             'servings' => 'nullable|integer|min:0',
             'ingredients' => 'nullable|array',
             'steps' => 'required|array',

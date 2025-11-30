@@ -19,7 +19,7 @@ class EditRecipeController extends Controller
         $dto = new EditRecipeInputDTO(
             id: $id,
             title: $request->validated('title'),
-            preparationTimeMinutes: $request->validated('preparation_time_minutes'),
+            preparationTimeMinutes: $request->validated('preparationTimeMinutes'),
             servings: $request->validated('servings'),
             ingredients: $request->validated('ingredients'),
             steps: $request->validated('steps'),

@@ -4,6 +4,12 @@ import store from '../store'
 
 const routes = [
   {
+    path: '/admin/recipes/:id/edit',
+    name: 'AdminRecipeEdit',
+    meta: { requiresAuth: true },
+    component: require('@/pages/AdminRecipeEdit.vue').default
+  },
+  {
     path: '/',
     redirect: '/login'
   },

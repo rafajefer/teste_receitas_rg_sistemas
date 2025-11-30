@@ -31,7 +31,7 @@
                 <td class="py-2 px-4 border-b">{{ recipe.title }}</td>
                 <td class="py-2 px-4 border-b">{{ recipe.categoryName }}</td>
                 <td class="py-2 px-4 border-b">
-                  <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition mr-2">Editar</button>
+                  <button class="bg-blue-600 text-white px-3 py-1 rounded hover:bg-blue-700 transition mr-2" @click="goToEdit(recipe.id)">Editar</button>
                   <button class="bg-red-600 text-white px-3 py-1 rounded hover:bg-red-700 transition">Excluir</button>
                 </td>
               </tr>
@@ -75,6 +75,9 @@ export default {
     },
     searchRecipes() {
       this.$store.dispatch('recipe/fetchRecipes', { title: this.search })
+    },
+    goToEdit(id) {
+      this.$router.push({ name: 'AdminRecipeEdit', params: { id } })
     }
   },
   mounted() {

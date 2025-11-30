@@ -30,7 +30,7 @@ final class EditRecipeUseCase implements EditRecipeUseCaseInterface
         return new EditRecipeOutputDTO(
             id: $recipe->id,
             title: $recipe->title,
-            preparation_time_minutes: $recipe->preparationTimeMinutes,
+            preparationTimeMinutes: $recipe->preparationTimeMinutes,
             servings: $recipe->servings,
             ingredients: $recipe->ingredients,
             steps: $recipe->steps,

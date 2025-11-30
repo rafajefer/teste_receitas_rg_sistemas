@@ -16,7 +16,7 @@ class CreateRecipeController extends Controller
         try {
             $inputDTO = new CreateRecipeInputDTO(
                 title: $request->title,
-                preparationTimeMinutes: $request->preparation_time_minutes,
+                preparationTimeMinutes: $request->preparationTimeMinutes,
                 servings: $request->servings,
                 ingredients: $request->ingredients,
                 steps: $request->steps,

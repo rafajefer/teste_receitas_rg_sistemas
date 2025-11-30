@@ -62,7 +62,7 @@ class EditRecipeUseCaseTest extends TestCase
         $this->assertInstanceOf(EditRecipeOutputDTO::class, $result);
         $this->assertEquals('10', $result->id);
         $this->assertEquals('Bolo de Cenoura', $result->title);
-        $this->assertEquals(45, $result->preparation_time_minutes);
+        $this->assertEquals(45, $result->preparationTimeMinutes);
         $this->assertEquals(6, $result->servings);
         $this->assertEquals(['Farinha', 'Ovo', 'Cenoura'], $result->ingredients);
         $this->assertEquals(['Misture tudo', 'Asse por 45 minutos'], $result->steps);
