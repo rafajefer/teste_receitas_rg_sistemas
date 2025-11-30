@@ -8,9 +8,9 @@ use App\Infrastructure\Persistence\Eloquent\Models\UserModel;
 
 class LogoutUserController
 {
-    public function __invoke(Request $request, LogoutUserUseCase $useCase)
+    public function __invoke(LogoutUserUseCase $useCase)
     {
-        $tokenId = auth()->user()->currentAccessToken()?->id;
+        $tokenId = auth('sanctum')->user()?->currentAccessToken()?->id;
         $useCase->execute($tokenId);
         return response()->json(['message' => 'Logout realizado com sucesso']);
     }
