@@ -13,16 +13,10 @@
         <nav>
           <ul class="space-y-4">
             <li>
-              <router-link to="/admin" class="block py-2 px-4 rounded hover:bg-blue-100">Ínicio</router-link>
-            </li>
-            <li>
-              <router-link to="/admin/users" class="block py-2 px-4 rounded hover:bg-blue-100">Usuários</router-link>
+              <router-link to="/admin" class="block py-2 px-4 rounded hover:bg-blue-100">Início</router-link>
             </li>
             <li>
               <router-link to="/admin/recipes" class="block py-2 px-4 rounded hover:bg-blue-100">Receitas</router-link>
-            </li>
-            <li>
-              <router-link to="/admin/settings" class="block py-2 px-4 rounded hover:bg-blue-100">Configurações</router-link>
             </li>
           </ul>
         </nav>
