@@ -12,7 +12,9 @@ use App\Application\UseCases\Recipe\PrintRecipeUseCase;
 use App\Application\UseCases\Recipe\PrintRecipeUseCaseInterface;
 use App\Domain\Repositories\RecipeRepositoryInterface;
 use App\Domain\Repositories\UserRepositoryInterface;
+use App\Domain\Services\DomPdfGeneratorService;
 use App\Domain\Services\Hash\HashServiceInterface;
+use App\Domain\Services\PdfGenerator\PdfGenerationServiceInterface;
 use App\Domain\Services\Token\TokenServiceInterface;
 use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentUserRepository;
 use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentRecipeRepository;
@@ -36,6 +38,8 @@ class AppServiceProvider extends ServiceProvider
 
         $this->app->bind(HashServiceInterface::class, LaravelHashService::class);
         $this->app->bind(TokenServiceInterface::class, SanctumTokenService::class);
+        $this->app->bind(PdfGenerationServiceInterface::class, DomPdfGeneratorService::class);
+
     }
 
     /**
