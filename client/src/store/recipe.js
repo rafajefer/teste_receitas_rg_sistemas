@@ -21,11 +21,15 @@ export default {
     }
   },
   actions: {
-    async fetchRecipes({ commit }) {
+    async fetchRecipes({ commit }, filter = {}) {
       commit('setLoading', true)
       commit('setError', '')
       try {
-        const response = await axios.get(`${apiUrl}/recipes`)
+        let url = `${apiUrl}/recipes`
+        if (filter.title) {
+          url += `?title=${encodeURIComponent(filter.title)}`
+        }
+        const response = await axios.get(url)
         commit('setRecipes', response.data)
       } catch (e) {
         commit('setError', 'Erro ao buscar receitas.')

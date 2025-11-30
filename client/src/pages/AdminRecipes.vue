@@ -3,7 +3,15 @@
     <template #default>
       <div>
         <h2 class="text-2xl font-bold mb-6">Receitas</h2>
-        <div class="mb-4 text-right">
+        <div class="mb-4 flex justify-between items-center">
+          <input
+            v-model="search"
+            @keyup.enter="searchRecipes"
+            type="text"
+            placeholder="Buscar por nome..."
+            class="px-3 py-2 border rounded w-1/2 mr-4"
+          />
+          <button @click="searchRecipes" class="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition mr-2">Buscar</button>
           <button @click="goToCreate" class="bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition">Adicionar Nova Receita</button>
         </div>
         <LoadingSpinner v-if="loading" />
@@ -45,6 +53,11 @@ import LoadingSpinner from '@/components/LoadingSpinner.vue'
 export default {
   name: 'AdminRecipes',
   components: { AdminLayout, LoadingSpinner },
+  data() {
+    return {
+      search: ''
+    }
+  },
   computed: {
     recipes() {
       return this.$store.getters['recipe/recipes']
@@ -59,6 +72,9 @@ export default {
   methods: {
     goToCreate() {
       this.$router.push({ name: 'AdminRecipeCreate' })
+    },
+    searchRecipes() {
+      this.$store.dispatch('recipe/fetchRecipes', { title: this.search })
     }
   },
   mounted() {
