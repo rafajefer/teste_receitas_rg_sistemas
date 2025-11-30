@@ -24,6 +24,12 @@ const routes = [
     name: 'AdminHome',
     meta: { requiresAuth: true },
     component: require('@/pages/AdminHome.vue').default
+  },
+  {
+    path: '/admin/recipes',
+    name: 'AdminRecipes',
+    meta: { requiresAuth: true },
+    component: require('@/pages/AdminRecipes.vue').default
   }
 ]
 
