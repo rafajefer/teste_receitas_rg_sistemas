@@ -31,7 +31,7 @@ export default {
       this.error = ''
       try {
         await this.$store.dispatch('auth/login', { login: this.loginField, password: this.password })
-        this.$router?.replace?.({ name: 'Home' })
+        this.$router?.replace?.({ name: 'AdminHome' })
       } catch (e) {
         console.log('Login error:', e)
         this.error = e.response?.data?.message || 'Erro ao autenticar.'

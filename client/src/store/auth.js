@@ -34,7 +34,8 @@ export default {
       commit('setUser', response.data.user)
       return response.data
     },
-    logout({ commit }) {
+    async logout({ commit }) {
+      await axios.post(`${apiUrl}/auth/logout`)
       commit('setToken', null)
       commit('setUser', null)
       localStorage.removeItem('token')

@@ -20,10 +20,10 @@ const routes = [
     component: require('@/components/RegisterForm.vue').default
   },
   {
-    path: '/home',
-    name: 'Home',
+    path: '/admin',
+    name: 'AdminHome',
     meta: { requiresAuth: true },
-    component: require('@/pages/Home.vue').default
+    component: require('@/pages/AdminHome.vue').default
   }
 ]
 
@@ -40,7 +40,7 @@ router.beforeEach((to, from, next) => {
   }
   // Se rota é pública e está autenticado, redireciona para Home
   else if (to.meta.public && isAuthenticated) {
-    next({ name: 'Home' })
+    next({ name: 'AdminHome' })
   }
   else {
     next()
