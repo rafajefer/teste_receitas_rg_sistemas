@@ -24,9 +24,12 @@
             <label class="block mb-1 font-semibold">Passos (um por linha)</label>
             <textarea v-model="stepsText" class="w-full px-3 py-2 border rounded" rows="4" required></textarea>
           </div>
-          <div class="mb-4">
+          <div class="mb-4 hidden">
             <label class="block mb-1 font-semibold">Categoria</label>
-            <input v-model.number="form.categoryId" type="number" min="1" class="w-full px-3 py-2 border rounded" required />
+            <select v-model.number="form.categoryId" class="w-full px-3 py-2 border rounded" required>
+              <option value="" disabled>Selecione uma categoria</option>
+              <option v-for="cat in categories" :key="cat.id" :value="cat.id">{{ cat.nome }}</option>
+            </select>
           </div>
           <button type="submit" class="bg-green-600 text-white px-6 py-2 rounded hover:bg-green-700 transition">Salvar</button>
           <button type="button" @click="cancel" class="ml-2 bg-gray-400 text-white px-6 py-2 rounded hover:bg-gray-500 transition">Cancelar</button>
@@ -54,15 +57,29 @@ export default {
         categoryId: null
       },
       ingredientsText: '',
-      stepsText: ''
+      stepsText: '',
+      categories: [
+        { id: 1, nome: 'Bolos e tortas doces' },
+        { id: 2, nome: 'Carnes' },
+        { id: 3, nome: 'Aves' },
+        { id: 4, nome: 'Peixes e frutos do mar' },
+        { id: 5, nome: 'Saladas, molhos e acompanhamentos' },
+        { id: 6, nome: 'Sopas' },
+        { id: 7, nome: 'Massas' },
+        { id: 8, nome: 'Bebidas' },
+        { id: 9, nome: 'Doces e sobremesas' },
+        { id: 10, nome: 'Lanches' },
+        { id: 11, nome: 'Prato Único' },
+        { id: 12, nome: 'Light' },
+        { id: 13, nome: 'Alimentação Saudável' }
+      ]
     }
   },
   methods: {
-    submit() {
+    async submit() {
       this.form.ingredients = this.ingredientsText.split('\n').filter(i => i.trim())
       this.form.steps = this.stepsText.split('\n').filter(s => s.trim())
-      // Aqui você pode enviar para a API
-      console.log('Receita criada:', this.form)
+      await this.$store.dispatch('recipe/createRecipe', this.form)
       this.$router.push({ name: 'AdminRecipes' })
     },
     cancel() {

@@ -35,6 +35,17 @@ export default {
         commit('setError', 'Erro ao buscar receitas.')
       }
       commit('setLoading', false)
+    },
+    async createRecipe({ commit, dispatch }, payload) {
+        commit('setLoading', true)
+        commit('setError', '')
+        try {
+            await axios.post(`${apiUrl}/recipes`, payload)
+            dispatch('fetchRecipes')
+        } catch (e) {
+            commit('setError', 'Erro ao criar receita.')
+        }
+        commit('setLoading', false)
     }
   },
   getters: {
