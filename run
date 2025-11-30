@@ -27,7 +27,7 @@ if [ "$1" == "install" ] ; then
     echo -e "${GREEN}Server dependencies installed successfully.${RESET}\n"
 
     echo -e "${GREEN}Installing client dependencies...${RESET}"
-    docker compose exec client cp client/.env.sample client/.env
+    cp client/.env.sample client/.env
     docker compose exec client npm install
     echo -e "${GREEN}Client dependencies installed successfully.${RESET}\n"
 
