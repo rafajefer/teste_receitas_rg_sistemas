@@ -6,11 +6,11 @@ RESET="\033[0m"
 # ---------- Help ----------
 if [ "$1" == "" ] ; then
   echo -e "Usage:\n"
-  echo -e "  ${GREEN}$0 install${RESET}                         - install dependencies for project (client and server)"
-  echo -e "  ${GREEN}$0 start${RESET}                           - start project (client and server)"
-  echo -e "  ${GREEN}$0 stop${RESET}                            - stop project (client and server)"
-  echo -e "  ${GREEN}$0 server restart${RESET}                  - restart server"
-  echo -e "  ${GREEN}$0 tests [unit|feature] [TestFile.php]${RESET} - run tests (optionally one test file)"
+  echo -e "  ${GREEN}$0 install${RESET}                                 - install dependencies for project (client and server)"
+  echo -e "  ${GREEN}$0 start${RESET}                                   - start project (client and server)"
+  echo -e "  ${GREEN}$0 stop${RESET}                                    - stop project (client and server)"
+  echo -e "  ${GREEN}$0 server restart${RESET}                          - restart server"
+  echo -e "  ${GREEN}$0 tests [unit|feature] [TestFile.php]${RESET}     - run tests (optionally one test file)"
   echo -e "  ${GREEN}$0 coverage [unit|feature|all] [--no-open]${RESET} - run coverage"
   exit 1
 fi
