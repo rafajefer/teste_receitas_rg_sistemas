@@ -7,7 +7,7 @@
             "request": "launch",
             "port": 9005,
             "pathMappings": {
-                "/var/www/html": "${workspaceFolder}/src"
+                "/var/www/html": "${workspaceFolder}/server"
             },
             "log": true
         }
