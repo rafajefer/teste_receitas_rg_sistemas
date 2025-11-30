@@ -6,7 +6,7 @@ RESET="\033[0m"
 # ---------- Help ----------
 if [ "$1" == "" ] ; then
   echo -e "Usage:\n"
-  echo -e "  ${GREEN}$0 install${RESET}                         - install project (client and server)"
+  echo -e "  ${GREEN}$0 install${RESET}                         - install dependencies for project (client and server)"
   echo -e "  ${GREEN}$0 start${RESET}                           - start project (client and server)"
   echo -e "  ${GREEN}$0 server${RESET}                          - start server"
   echo -e "  ${GREEN}$0 server restart${RESET}                  - restart server"
@@ -27,7 +27,7 @@ if [ "$1" == "install" ] ; then
     echo -e "${GREEN}Server dependencies installed successfully.${RESET}\n"
 
     echo -e "${GREEN}Installing client dependencies...${RESET}"
-    # docker compose exec client cp .env.sample .env
+    docker compose exec client cp client/.env.sample client/.env
     docker compose exec client npm install
     echo -e "${GREEN}Client dependencies installed successfully.${RESET}\n"
 
@@ -39,7 +39,11 @@ fi
 
 # ---------- start ----------
 if [ "$1" == "start" ] ; then
+    echo -e "${GREEN}Starting Docker containers...${RESET}"
     docker compose up -d
+    echo -e "${GREEN}Docker containers started successfully.${RESET}\n"
+    echo -e "You can access the client at: ${GREEN}http://localhost:3000${RESET}\n"
+    echo -e "You can access the server at: ${GREEN}http://localhost:8000${RESET}\n"
     exit 0
 fi
 
