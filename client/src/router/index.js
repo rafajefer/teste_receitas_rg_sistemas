@@ -30,6 +30,12 @@ const routes = [
     name: 'AdminRecipes',
     meta: { requiresAuth: true },
     component: require('@/pages/AdminRecipes.vue').default
+  },
+  {
+    path: '/admin/recipes/create',
+    name: 'AdminRecipeCreate',
+    meta: { requiresAuth: true },
+    component: require('@/pages/AdminRecipeCreate.vue').default
   }
 ]
 
