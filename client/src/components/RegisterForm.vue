@@ -26,8 +26,6 @@
 </template>
 
 <script>
-import axios from 'axios'
-const apiUrl = process.env.VUE_APP_API_URL || 'http://localhost:8000/api'
 
 export default {
   name: 'RegisterForm',
@@ -46,15 +44,14 @@ export default {
       this.error = ''
       this.success = ''
       try {
-        await axios.post(`${apiUrl}/auth/register`, {
+        await this.$store.dispatch('auth/register', {
           name: this.name,
           login: this.loginField,
           password: this.password,
           password_confirmation: this.password_confirmation
         })
         this.success = 'Cadastro realizado com sucesso!'
-        // Redirecionar para login se desejar
-        // this.$router.push({ name: 'Login' })
+        this.$router.push({ name: 'Login' })
       } catch (e) {
         this.error = e.response?.data?.message || 'Erro ao cadastrar.'
       }

@@ -41,6 +41,9 @@ export default {
       localStorage.removeItem('token')
       localStorage.removeItem('user')
       delete axios.defaults.headers.common['Authorization']
+    },
+    async register(_, payload) {
+      await axios.post(`${apiUrl}/auth/register`, payload)
     }
   },
   getters: {
