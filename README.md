@@ -79,9 +79,12 @@ client/
 	```bash
 	docker compose exec server php artisan migrate
 	```
-4. Acessar API e SPA:
+4. Acessar API, SPA e phpMyAdmin:
 	- Frontend: [http://localhost:3000](http://localhost:3000)
 	- Backend/API: [http://localhost:8000](http://localhost:8000)
+	- phpMyAdmin: [http://localhost:8001](http://localhost:8001)
+	  - Usuário: `root`
+	  - Senha: `root`
 
 ## Testes
 
@@ -98,8 +101,58 @@ O relatório estará disponível em `server/coverage/index.html`.
 
 ## Endpoints Principais
 
+
 - **Auth:** `/api/register`, `/api/login`, `/api/logout`
 - **Receitas:** `/api/recipes`, `/api/recipes/{id}`
+
+## Exemplos de Requisições API
+
+### Cadastro de usuário
+```bash
+curl -X POST http://localhost:8000/api/register \
+	-H "Content-Type: application/json" \
+	-d '{
+		"name": "Rafael",
+		"email": "rafael@email.com",
+		"password": "senha123",
+		"password_confirmation": "senha123"
+	}'
+```
+
+### Login
+```bash
+curl -X POST http://localhost:8000/api/login \
+	-H "Content-Type: application/json" \
+	-d '{
+		"email": "rafael@email.com",
+		"password": "senha123"
+	}'
+```
+
+### Listar receitas (autenticado)
+```bash
+curl -X GET http://localhost:8000/api/recipes \
+	-H "Authorization: Bearer <TOKEN>"
+```
+
+### Criar receita (autenticado)
+```bash
+curl -X POST http://localhost:8000/api/recipes \
+	-H "Authorization: Bearer <TOKEN>" \
+	-H "Content-Type: application/json" \
+	-d '{
+		"title": "Bolo de Cenoura",
+		"description": "Receita clássica de bolo de cenoura com cobertura de chocolate.",
+		"ingredients": "cenoura, farinha, ovos, açúcar, chocolate",
+		"steps": "Misture tudo, asse por 40min."
+	}'
+```
+
+### Logout
+```bash
+curl -X POST http://localhost:8000/api/logout \
+	-H "Authorization: Bearer <TOKEN>"
+```
 
 ## Desenvolvimento
 
@@ -117,6 +170,10 @@ O relatório estará disponível em `server/coverage/index.html`.
 - **Iniciar projeto (client, server, nginx, db):**
 	```bash
 	./run start
+	```
+- **Parar projeto (client, server, nginx, db):**
+	```bash
+	./run stop
 	```
 - **Rodar todos os testes:**
 	```bash
@@ -217,4 +274,16 @@ Rafael Jeferson
 
 ## Licença
 
+
 MIT
+
+## Links Úteis
+
+- [Documentação Laravel](https://laravel.com/docs)
+- [Documentação Vue 3](https://vuejs.org/guide/introduction.html)
+- [Documentação Vite](https://vitejs.dev/guide/)
+- [Documentação TailwindCSS](https://tailwindcss.com/docs/installation)
+- [Documentação Docker](https://docs.docker.com/)
+- [Documentação Docker Compose](https://docs.docker.com/compose/)
+- [Documentação Axios](https://axios-http.com/docs/intro)
+- [Documentação PHPUnit](https://phpunit.de/documentation.html)
