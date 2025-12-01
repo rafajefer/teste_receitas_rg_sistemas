@@ -92,27 +92,31 @@ client/
 	./run install
 	```
 	ou rode os comandos separadamente:
+	1 . Construir e iniciar containers:
 	```bash
 	docker compose up -d --build
 	```
+	2. Instalar dependências do backend:
 	```bash
 	docker compose exec server composer install
 	```
+	3. Rodar migrações e popular banco de dados:
+	```bash
+	docker compose exec server php artisan migrate:fresh --seed
+	```
+	4. Gerar documentação Swagger da API:
 	```bash
 	docker compose exec server php artisan l5-swagger:generate
 	```
+	5. Instalar dependências do frontend:
 	```bash
-		cp client/.env.sample client/.env
+	cp client/.env.sample client/.env
 	```
 	```bash
 	docker compose exec client npm install
 	```
 
 
-3. Migrar banco de dados:
-	```bash
-	docker compose exec server php artisan migrate
-	```
 4. Acessar API, SPA e phpMyAdmin:
 	- Frontend: [http://localhost:3000](http://localhost:3000)
 	- Backend/API: [http://localhost:8000](http://localhost:8000)
@@ -313,10 +317,15 @@ Execute esses comandos no diretório raiz do projeto:
 	sudo chown -R $USER:$USER client/
 	sudo chown -R $USER:$USER server/
 	```
+- **Acessar o banco de dados MySQL:**
+	```bash
+	docker compose exec db mysql -u root -proot mydb
+	select * from usuarios;
+	```
 
 ## Autor
 
-Rafael Jeferson
+Rafael Jeferson Pena
 
 ## Licença
 
