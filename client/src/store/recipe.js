@@ -48,15 +48,26 @@ export default {
         commit('setLoading', false)
     },
     async editRecipe({ commit, dispatch }, { id, ...payload }) {
-        commit('setLoading', true)
-        commit('setError', '')
-        try {
-            await axios.put(`${apiUrl}/recipes/${id}`, payload)
-            dispatch('fetchRecipes')
-        } catch (e) {
-            commit('setError', 'Erro ao editar receita.')
-        }
-        commit('setLoading', false)
+      commit('setLoading', true)
+      commit('setError', '')
+      try {
+        await axios.put(`${apiUrl}/recipes/${id}`, payload)
+        dispatch('fetchRecipes')
+      } catch (e) {
+        commit('setError', 'Erro ao editar receita.')
+      }
+      commit('setLoading', false)
+    },
+    async deleteRecipe({ commit, dispatch }, id) {
+      commit('setLoading', true)
+      commit('setError', '')
+      try {
+        await axios.delete(`${apiUrl}/recipes/${id}`)
+        dispatch('fetchRecipes')
+      } catch (e) {
+        commit('setError', 'Erro ao excluir receita.')
+      }
+      commit('setLoading', false)
     }
   },
   getters: {
