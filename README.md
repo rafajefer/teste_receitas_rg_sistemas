@@ -91,7 +91,8 @@ client/
 	```bash
 	./run install
 	```
-	ou rode os comandos separadamente:
+	ou rode os comandos separadamente.
+
 	1 . Construir e iniciar containers:
 	```bash
 	docker compose up -d --build
@@ -103,24 +104,24 @@ client/
 	```bash
 	docker compose exec server composer install
 	```
-	3. Rodar migrações e popular banco de dados:
-	```bash
-	docker compose exec server php artisan migrate:fresh --seed
-	```
-	4. Gerar chave de aplicação Laravel:
+	3. Gerar chave de aplicação Laravel:
 	```bash
 	docker compose exec server php artisan key:generate
 	```
-	5. Gerar documentação Swagger da API:
+	4. Gerar documentação Swagger da API:
 	```bash
 	docker compose exec server php artisan l5-swagger:generate
 	```
-	6. Instalar dependências do frontend:
+	5. Instalar dependências do frontend:
 	```bash
 	cp client/.env.sample client/.env
 	```
 	```bash
 	docker compose exec client npm install
+	```
+	6. Rodar migrações e popular banco de dados:
+	```bash
+	docker compose exec server php artisan migrate:fresh --seed
 	```
 
 
