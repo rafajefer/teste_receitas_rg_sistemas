@@ -31,6 +31,24 @@ Aplicação completa para gerenciamento de receitas, incluindo cadastro de usuá
 - Arquitetura desacoplada com SPA
 - Testes unitários
 
+
+## Autenticação no Swagger UI
+
+Para testar as rotas protegidas da API via Swagger UI:
+
+1. Gere um token de autenticação realizando o login pela rota `/api/auth/login` (via Swagger ou outro client).
+2. Copie o valor do campo `accessToken` retornado.
+3. No Swagger UI, clique em "Authorize" e insira o token no formato:
+   
+	```
+	Bearer SEU_TOKEN_AQUI
+	```
+
+4. Após autorizar, você poderá acessar as rotas protegidas normalmente.
+
+**Importante:** O token deve ser precedido de `Bearer ` (com espaço).
+
+---
 ## Estrutura do Projeto
 
 - **server/**: Backend Laravel (PHP)
@@ -213,10 +231,15 @@ curl -X POST http://localhost:8000/api/logout \
 	# O relatório estará disponível em server/coverage/index.html
 	```
 
+
 ## Comandos docker Úteis
 
 Execute esses comandos no diretório raiz do projeto:
 
+- **Gerar documentação Swagger da API:**
+	```bash
+	docker compose exec server php artisan l5-swagger:generate
+	```
 - **Acessar o container do client:**
 	```bash
 	docker compose exec client bash

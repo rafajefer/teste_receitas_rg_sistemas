@@ -8,7 +8,39 @@ use App\Interfaces\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
-class PrintRecipeController extends Controller
+/**
+ * @OA\Get(
+ *     path="/api/recipes/{id}/print",
+ *     summary="Imprime uma receita em PDF",
+ *     tags={"Receitas"},
+ *     security={{"sanctum":{}}},
+ *     @OA\Parameter(
+ *         name="id",
+ *         in="path",
+ *         required=true,
+ *         @OA\Schema(type="string")
+ *     ),
+ *     @OA\Response(
+ *         response=200,
+ *         description="PDF gerado com sucesso",
+ *         @OA\MediaType(
+ *             mediaType="application/pdf",
+ *             @OA\Schema(
+ *                 type="string",
+ *                 format="binary"
+ *             )
+ *         )
+ *     ),
+ *     @OA\Response(
+ *         response=401,
+ *         description="Não autenticado",
+ *         @OA\JsonContent(
+ *             @OA\Property(property="error", type="string", example="Unauthenticated.")
+ *         )
+ *     )
+ * )
+ */
+final class PrintRecipeController extends Controller
 {
     public function __construct(
         private PrintRecipeUseCaseInterface $printRecipeUseCase

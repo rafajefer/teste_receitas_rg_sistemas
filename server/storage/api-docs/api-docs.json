@@ -1,0 +1,797 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "API da Teste Receitas RG Sistemas",
+        "description": "Documentação da API para o projeto da Teste Receitas RG Sistemas",
+        "contact": {
+            "email": "rafa.jefer@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:8000/",
+            "description": "Servidor local"
+        }
+    ],
+    "paths": {
+        "/api/auth/login": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Login do usuário",
+                "operationId": "e8d2fd60b5a8ad165c07662e67fb0fb6",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "login",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "login": {
+                                        "type": "string",
+                                        "example": "admin"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "123456"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Login realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "accessToken": {
+                                            "type": "string",
+                                            "example": "50|fgBpARSV1N0sMg5cPwbM0p8p35xw7cEEs93IwWNk346b4ca8"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Credenciais inválidas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Credenciais inválidas"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/auth/logout": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Logout do usuário autenticado",
+                "operationId": "b0c64fa85224987106bb67dda58fb438",
+                "responses": {
+                    "200": {
+                        "description": "Logout realizado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Logout realizado com sucesso"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Não autenticado"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/auth/register": {
+            "post": {
+                "tags": [
+                    "Auth"
+                ],
+                "summary": "Registrar novo usuário",
+                "operationId": "bebd45ec797fe66dd2e375be49fc5788",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "name",
+                                    "login",
+                                    "password"
+                                ],
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nome do Usuário"
+                                    },
+                                    "login": {
+                                        "type": "string",
+                                        "example": "usuarioteste"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "senha123"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "201": {
+                        "description": "Usuário registrado com sucesso",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "9"
+                                        },
+                                        "name": {
+                                            "type": "string",
+                                            "example": "Novo Usuário"
+                                        },
+                                        "login": {
+                                            "type": "string",
+                                            "example": "usuarioteste"
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Erro de domínio",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erro de domínio: ..."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Erro interno do servidor",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Erro interno do servidor."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/api/recipes": {
+            "get": {
+                "tags": [
+                    "Receitas"
+                ],
+                "summary": "Lista todas as receitas",
+                "operationId": "aad95b03e882dfbecea7a0d7e0ec9c44",
+                "parameters": [
+                    {
+                        "name": "title",
+                        "in": "query",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Lista de receitas",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "properties": {
+                                            "id": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "title": {
+                                                "type": "string",
+                                                "example": "Bolo de Cenoura"
+                                            },
+                                            "preparationTimeMinutes": {
+                                                "type": "integer",
+                                                "example": 60
+                                            },
+                                            "servings": {
+                                                "type": "integer",
+                                                "example": 10
+                                            },
+                                            "ingredients": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "steps": {
+                                                "type": "array",
+                                                "items": {
+                                                    "type": "string"
+                                                }
+                                            },
+                                            "userId": {
+                                                "type": "string",
+                                                "example": "1"
+                                            },
+                                            "userName": {
+                                                "type": "string",
+                                                "example": "Administrador"
+                                            },
+                                            "categoryId": {
+                                                "type": "string",
+                                                "example": null
+                                            },
+                                            "categoryName": {
+                                                "type": "string",
+                                                "example": null
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "example": [
+                                    {
+                                        "id": "1",
+                                        "title": "Bolo de Cenoura",
+                                        "preparationTimeMinutes": 60,
+                                        "servings": 10,
+                                        "ingredients": [
+                                            "3 cenouras médias raladas",
+                                            "4 ovos",
+                                            "1 xícara de óleo",
+                                            "2 xícaras de açúcar",
+                                            "2 e 1/2 xícaras de farinha de trigo",
+                                            "1 colher de sopa de fermento em pó"
+                                        ],
+                                        "steps": [
+                                            "Bata no liquidificador as cenouras, ovos e óleo.",
+                                            "Adicione o açúcar e bata novamente.",
+                                            "Misture a farinha e o fermento em uma tigela e acrescente a mistura do liquidificador.",
+                                            "Despeje em uma forma untada e asse em forno médio por 40 minutos."
+                                        ],
+                                        "userId": "1",
+                                        "userName": "Administrador",
+                                        "categoryId": "1",
+                                        "categoryName": "Bolos e tortas doces"
+                                    },
+                                    {
+                                        "id": "2",
+                                        "title": "Pudim de Leite Condensado",
+                                        "preparationTimeMinutes": 90,
+                                        "servings": 8,
+                                        "ingredients": [
+                                            "1 lata de leite condensado",
+                                            "2 latas de leite (medida da lata de leite condensado)",
+                                            "3 ovos",
+                                            "1 xícara de açúcar (para o caramelo)"
+                                        ],
+                                        "steps": [
+                                            "Faça o caramelo com o açúcar e espalhe na forma.",
+                                            "Bata os demais ingredientes no liquidificador.",
+                                            "Despeje na forma caramelizada.",
+                                            "Asse em banho-maria por cerca de 1h30."
+                                        ],
+                                        "userId": "1",
+                                        "userName": "Administrador",
+                                        "categoryId": null,
+                                        "categoryName": null
+                                    }
+                                ]
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "post": {
+                "tags": [
+                    "Receitas"
+                ],
+                "summary": "Cria uma nova receita",
+                "operationId": "7882e720858cf0ca7fb47c7a2d36bdfe",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "preparation_time_minutes": {
+                                        "type": "integer"
+                                    },
+                                    "servings": {
+                                        "type": "integer"
+                                    },
+                                    "ingredients": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "steps": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "category_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "title": "Novo Bolo de Cenoura",
+                                "description": "Um bolo clássico, fofinho, delicioso e bem colorido.",
+                                "ingredients": [
+                                    "3 cenouras médias raladas",
+                                    "4 ovos",
+                                    "1 xícara de óleo",
+                                    "2 xícaras de açúcar",
+                                    "2 e 1/2 xícaras de farinha de trigo",
+                                    "1 colher de sopa de fermento em pó"
+                                ],
+                                "steps": [
+                                    "Bata no liquidificador as cenouras, ovos e óleo.",
+                                    "Adicione o açúcar e bata novamente.",
+                                    "Misture a farinha e o fermento em uma tigela e acrescente a mistura do liquidificador.",
+                                    "Despeje em uma forma untada e asse em forno médio por 40 minutos."
+                                ],
+                                "preparation_time_minutes": 60,
+                                "servings": 10,
+                                "category_id": null
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Receita criada"
+                    },
+                    "401": {
+                        "description": "Não autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/recipes/{id}": {
+            "put": {
+                "tags": [
+                    "Receitas"
+                ],
+                "summary": "Atualiza uma receita",
+                "operationId": "b88b977d98ca0ff193538bdc4325bea7",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "required": [
+                                    "title",
+                                    "category_id"
+                                ],
+                                "properties": {
+                                    "title": {
+                                        "type": "string"
+                                    },
+                                    "description": {
+                                        "type": "string"
+                                    },
+                                    "preparation_time_minutes": {
+                                        "type": "integer"
+                                    },
+                                    "servings": {
+                                        "type": "integer"
+                                    },
+                                    "ingredients": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "steps": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "string"
+                                        }
+                                    },
+                                    "category_id": {
+                                        "type": "integer"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "example": {
+                                "title": "Bolo de Cenoura modificado",
+                                "description": "Um bolo clássico, fofinho e delicioso.",
+                                "ingredients": [
+                                    "3 cenouras médias raladas",
+                                    "4 ovos",
+                                    "1 xícara de óleo",
+                                    "2 xícaras de açúcar",
+                                    "2 e 1/2 xícaras de farinha de trigo",
+                                    "1 colher de sopa de fermento em pó"
+                                ],
+                                "steps": [
+                                    "Bata no liquidificador as cenouras, ovos e óleo.",
+                                    "Adicione o açúcar e bata novamente.",
+                                    "Misture a farinha e o fermento em uma tigela e acrescente a mistura do liquidificador.",
+                                    "Despeje em uma forma untada e asse em forno médio por 40 minutos."
+                                ],
+                                "preparation_time_minutes": 60,
+                                "servings": 10,
+                                "category_id": null
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Receita atualizada",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "title": {
+                                            "type": "string",
+                                            "example": "Bolo de Cenoura modificado"
+                                        },
+                                        "preparationTimeMinutes": {
+                                            "type": "integer",
+                                            "example": null
+                                        },
+                                        "servings": {
+                                            "type": "integer",
+                                            "example": 10
+                                        },
+                                        "ingredients": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "steps": {
+                                            "type": "array",
+                                            "items": {
+                                                "type": "string"
+                                            }
+                                        },
+                                        "user_id": {
+                                            "type": "string",
+                                            "example": "1"
+                                        },
+                                        "category_id": {
+                                            "type": "integer",
+                                            "example": null
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "example": {
+                                    "id": "1",
+                                    "title": "Bolo de Cenoura modificado",
+                                    "preparationTimeMinutes": null,
+                                    "servings": 10,
+                                    "ingredients": [
+                                        "3 cenouras médias raladas",
+                                        "4 ovos",
+                                        "1 xícara de óleo",
+                                        "2 xícaras de açúcar",
+                                        "2 e 1/2 xícaras de farinha de trigo",
+                                        "1 colher de sopa de fermento em pó"
+                                    ],
+                                    "steps": [
+                                        "Bata no liquidificador as cenouras, ovos e óleo.",
+                                        "Adicione o açúcar e bata novamente.",
+                                        "Misture a farinha e o fermento em uma tigela e acrescente a mistura do liquidificador.",
+                                        "Despeje em uma forma untada e asse em forno médio por 40 minutos."
+                                    ],
+                                    "user_id": "1",
+                                    "category_id": null
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            },
+            "delete": {
+                "tags": [
+                    "Receitas"
+                ],
+                "summary": "Remove uma receita",
+                "operationId": "3a5b52369b6fd6ea1411207b8d2ea876",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Receita removida",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "message": {
+                                            "type": "string",
+                                            "example": "Receita removida com sucesso."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        },
+        "/api/recipes/{id}/print": {
+            "get": {
+                "tags": [
+                    "Receitas"
+                ],
+                "summary": "Imprime uma receita em PDF",
+                "operationId": "fa47e84438dadf6ac3d66ab5e7a71f1b",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "PDF gerado com sucesso",
+                        "content": {
+                            "application/pdf": {
+                                "schema": {
+                                    "type": "string",
+                                    "format": "binary"
+                                }
+                            }
+                        }
+                    },
+                    "401": {
+                        "description": "Não autenticado",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "properties": {
+                                        "error": {
+                                            "type": "string",
+                                            "example": "Unauthenticated."
+                                        }
+                                    },
+                                    "type": "object"
+                                }
+                            }
+                        }
+                    }
+                },
+                "security": [
+                    {
+                        "sanctum": []
+                    }
+                ]
+            }
+        }
+    },
+    "tags": [
+        {
+            "name": "Auth",
+            "description": "Auth"
+        },
+        {
+            "name": "Receitas",
+            "description": "Receitas"
+        }
+    ],
+    "components": {
+        "securitySchemes": {
+            "sanctum": {
+                "type": "apiKey",
+                "description": "Enter token in format (Bearer <token>)",
+                "name": "Authorization",
+                "in": "header"
+            }
+        }
+    }
+}
