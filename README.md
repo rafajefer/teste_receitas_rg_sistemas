@@ -98,6 +98,12 @@ client/
 	```
 	2. Instalar dependências do backend:
 	```bash
+	cp server/.env.example server/.env
+	```
+	```bash
+	docker compose exec server php artisan key:generate
+	```
+	```bash
 	docker compose exec server composer install
 	```
 	3. Rodar migrações e popular banco de dados:

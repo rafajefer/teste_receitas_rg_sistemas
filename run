@@ -22,6 +22,10 @@ if [ "$1" == "install" ] ; then
     docker compose up -d --build
     echo -e "${GREEN}Docker containers built successfully.${RESET}\n"
 
+
+    cp server/.env.example server/.env
+    docker compose exec server php artisan key:generate
+
     echo -e "${GREEN}Installing server dependencies...${RESET}"
     docker compose exec server composer install
     echo -e "${GREEN}Server dependencies installed successfully.${RESET}\n"
