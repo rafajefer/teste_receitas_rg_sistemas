@@ -1,13 +1,10 @@
 <?php
 
-namespace Database\Factories;
+namespace App\Database\Factories\Infrastructure\Persistence\Eloquent\Models;
 
 use App\Infrastructure\Persistence\Eloquent\Models\CategoryModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Categora>
- */
 class CategoryFactory extends Factory
 {
     protected $model = CategoryModel::class;

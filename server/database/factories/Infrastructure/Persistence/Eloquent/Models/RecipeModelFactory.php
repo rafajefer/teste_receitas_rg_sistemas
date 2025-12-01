@@ -7,9 +7,6 @@ use App\Infrastructure\Persistence\Eloquent\Models\RecipeModel;
 use App\Infrastructure\Persistence\Eloquent\Models\UserModel;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
-/**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Receita>
- */
 class RecipeModelFactory extends Factory
 {
     protected $model = RecipeModel::class;
