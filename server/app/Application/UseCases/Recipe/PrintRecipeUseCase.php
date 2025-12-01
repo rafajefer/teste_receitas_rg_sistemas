@@ -16,10 +16,11 @@ final class PrintRecipeUseCase implements PrintRecipeUseCaseInterface
     public function execute(string $id): PdfFileOutputDTO
     {
         $recipe = $this->recipeRepository->findById($id);
+        $filename = 'recipe_' . $id . '.pdf';
         return $this->pdfGenerationService->generate(
             data: ['recipe' => $recipe],
             view: 'recipes.print',
-            filename: 'recipe_' . $recipe->id . '.pdf'
+            filename: $filename
         );
     }
 }

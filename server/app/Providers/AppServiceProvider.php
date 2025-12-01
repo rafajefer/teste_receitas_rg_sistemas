@@ -12,13 +12,13 @@ use App\Application\UseCases\Recipe\PrintRecipeUseCase;
 use App\Application\UseCases\Recipe\PrintRecipeUseCaseInterface;
 use App\Domain\Repositories\RecipeRepositoryInterface;
 use App\Domain\Repositories\UserRepositoryInterface;
-use App\Domain\Services\DomPdfGeneratorService;
 use App\Domain\Services\Hash\HashServiceInterface;
 use App\Domain\Services\PdfGenerator\PdfGenerationServiceInterface;
 use App\Domain\Services\Token\TokenServiceInterface;
 use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentUserRepository;
 use App\Infrastructure\Persistence\Eloquent\Repositories\EloquentRecipeRepository;
 use App\Infrastructure\Services\Hash\LaravelHashService;
+use App\Infrastructure\Services\PdfGenerator\DomPdfGeneratorService;
 use App\Infrastructure\Services\Token\SanctumTokenService;
 use Illuminate\Support\ServiceProvider;
 

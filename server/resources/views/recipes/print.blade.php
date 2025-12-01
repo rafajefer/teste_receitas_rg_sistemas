@@ -14,8 +14,8 @@
 <body>
     <h1>{{ $recipe->title }}</h1>
     <div class="section">
-        <span class="label">Categoria:</span> {{ $recipe->categoryName }}<br>
-        <span class="label">Autor:</span> {{ $recipe->userName }}<br>
+        <span class="label">Categoria:</span> {{ $recipe->category?->name ?? "Sem categoria" }}<br>
+        <span class="label">Autor:</span> {{ $recipe->user?->name ?? "Desconhecido" }}<br>
         <span class="label">Tempo de preparo:</span> {{ $recipe->preparationTimeMinutes ?? '-' }} minutos<br>
         <span class="label">Porções:</span> {{ $recipe->servings ?? '-' }}<br>
     </div>

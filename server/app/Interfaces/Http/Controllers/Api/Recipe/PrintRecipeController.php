@@ -3,8 +3,9 @@
 namespace App\Interfaces\Http\Controllers\Api\Recipe;
 
 use App\Application\UseCases\Recipe\PrintRecipeUseCaseInterface;
+use App\Domain\Exceptions\RecipeNotFoundException;
 use App\Interfaces\Http\Controllers\Controller;
-use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Response;
 
 class PrintRecipeController extends Controller
@@ -13,10 +14,26 @@ class PrintRecipeController extends Controller
         private PrintRecipeUseCaseInterface $printRecipeUseCase
     ) {}
 
-    public function __invoke(string $id): Response
+    public function __invoke(string $id): Response | JsonResponse
     {
-        $recipe = $this->printRecipeUseCase->execute($id);
-        $pdf = Pdf::loadView('recipes.print', ['recipe' => $recipe]);
-        return $pdf->download('recipe_' . $recipe->id . '.pdf');
+        try {
+            $pdf = $this->printRecipeUseCase->execute($id);
+            return response($pdf->content, 200, [
+                'Content-Type' => 'application/pdf',
+                'Content-Disposition' => 'attachment; filename="' . $pdf->filename . '"',
+            ]);
+        } catch (RecipeNotFoundException $e) {
+            return response()->json([
+                'error' => $e->getMessage(),
+            ], 404);
+        } catch (\DomainException $e) {
+            return response()->json([
+                'error' => 'Erro de domínio: ' . $e->getMessage(),
+            ], 400);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'error' => 'Erro interno do servidor.',
+            ], 500);
+        }
     }
 }
