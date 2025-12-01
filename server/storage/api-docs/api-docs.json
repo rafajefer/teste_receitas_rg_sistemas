@@ -403,7 +403,7 @@
                             "schema": {
                                 "required": [
                                     "title",
-                                    "category_id"
+                                    "categoryId"
                                 ],
                                 "properties": {
                                     "title": {
@@ -430,7 +430,7 @@
                                             "type": "string"
                                         }
                                     },
-                                    "category_id": {
+                                    "categoryId": {
                                         "type": "integer"
                                     }
                                 },
@@ -455,7 +455,7 @@
                                 ],
                                 "preparation_time_minutes": 60,
                                 "servings": 10,
-                                "category_id": null
+                                "categoryId": null
                             }
                         }
                     }
@@ -512,7 +512,7 @@
                             "schema": {
                                 "required": [
                                     "title",
-                                    "category_id"
+                                    "categoryId"
                                 ],
                                 "properties": {
                                     "title": {
@@ -539,7 +539,7 @@
                                             "type": "string"
                                         }
                                     },
-                                    "category_id": {
+                                    "categoryId": {
                                         "type": "integer"
                                     }
                                 },
@@ -564,7 +564,7 @@
                                 ],
                                 "preparation_time_minutes": 60,
                                 "servings": 10,
-                                "category_id": null
+                                "categoryId": null
                             }
                         }
                     }
@@ -608,7 +608,7 @@
                                             "type": "string",
                                             "example": "1"
                                         },
-                                        "category_id": {
+                                        "categoryId": {
                                             "type": "integer",
                                             "example": null
                                         }
@@ -635,7 +635,7 @@
                                         "Despeje em uma forma untada e asse em forno médio por 40 minutos."
                                     ],
                                     "user_id": "1",
-                                    "category_id": null
+                                    "categoryId": null
                                 }
                             }
                         }
