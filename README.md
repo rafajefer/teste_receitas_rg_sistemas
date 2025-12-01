@@ -1,5 +1,3 @@
-
-
 # Projeto de Receitas – API Laravel + Front-end Vue 3 (SPA)
 
 Aplicação completa para gerenciamento de receitas, incluindo cadastro de usuários, autenticação, CRUD de receitas, pesquisa, edição, exclusão, além de uma SPA independente em Vue 3 + TypeScript. O backend é desenvolvido em Laravel seguindo princípios de Clean Architecture, SOLID, testes unitários e executado via Docker.
@@ -93,6 +91,24 @@ client/
 	```bash
 	./run install
 	```
+	ou rode os comandos separadamente:
+	```bash
+	docker compose up -d --build
+	```
+	```bash
+	docker compose exec server composer install
+	```
+	```bash
+	docker compose exec server php artisan l5-swagger:generate
+	```
+	```bash
+		cp client/.env.sample client/.env
+	```
+	```bash
+	docker compose exec client npm install
+	```
+
+
 3. Migrar banco de dados:
 	```bash
 	docker compose exec server php artisan migrate
@@ -100,6 +116,7 @@ client/
 4. Acessar API, SPA e phpMyAdmin:
 	- Frontend: [http://localhost:3000](http://localhost:3000)
 	- Backend/API: [http://localhost:8000](http://localhost:8000)
+	- Documentação Swagger: [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation)
 	- phpMyAdmin: [http://localhost:8001](http://localhost:8001)
 	  - Usuário: `root`
 	  - Senha: `root`
@@ -120,14 +137,14 @@ O relatório estará disponível em `server/coverage/index.html`.
 ## Endpoints Principais
 
 
-- **Auth:** `/api/register`, `/api/login`, `/api/logout`
+- **Auth:** `/api/register`, `/api/auth/login`, `/api/auth/logout`, `/api/auth/register`
 - **Receitas:** `/api/recipes`, `/api/recipes/{id}`
 
 ## Exemplos de Requisições API
 
 ### Cadastro de usuário
 ```bash
-curl -X POST http://localhost:8000/api/register \
+curl -X POST http://localhost:8000/api/auth/register \
 	-H "Content-Type: application/json" \
 	-d '{
 		"name": "Rafael",
@@ -139,12 +156,18 @@ curl -X POST http://localhost:8000/api/register \
 
 ### Login
 ```bash
-curl -X POST http://localhost:8000/api/login \
+curl -X POST http://localhost:8000/api/auth/login \
 	-H "Content-Type: application/json" \
 	-d '{
 		"email": "rafael@email.com",
 		"password": "senha123"
 	}'
+```
+
+### Logout
+```bash
+curl -X POST http://localhost:8000/api/auth/logout \
+	-H "Authorization: Bearer <TOKEN>"
 ```
 
 ### Listar receitas (autenticado)
@@ -310,3 +333,11 @@ MIT
 - [Documentação Docker Compose](https://docs.docker.com/compose/)
 - [Documentação Axios](https://axios-http.com/docs/intro)
 - [Documentação PHPUnit](https://phpunit.de/documentation.html)
+
+## Documentação da API (Swagger)
+
+A documentação interativa da API está disponível em:
+
+[Swagger UI](http://localhost:8080/api/documentation)
+
+> Acesse para visualizar, testar endpoints e validar contratos da API.
