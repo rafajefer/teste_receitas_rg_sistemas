@@ -42,7 +42,7 @@ if [ "$1" == "install" ] ; then
 
 
     echo -e "${GREEN}Setting up the database...${RESET}"
-    docker compose exec server php artisan migrate --seed
+    docker compose exec server php artisan migrate:fresh --seed
 
     echo -e "${GREEN}Project installed successfully!${RESET}\n"
     echo -e "You can start the project by running:\n"
