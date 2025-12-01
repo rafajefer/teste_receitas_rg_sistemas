@@ -22,14 +22,14 @@ use Illuminate\Http\JsonResponse;
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             required={"title", "category_id"},
+ *             required={"title", "categoryId"},
  *             @OA\Property(property="title", type="string"),
  *             @OA\Property(property="description", type="string"),
  *             @OA\Property(property="preparation_time_minutes", type="integer"),
  *             @OA\Property(property="servings", type="integer"),
  *             @OA\Property(property="ingredients", type="array", @OA\Items(type="string")),
  *             @OA\Property(property="steps", type="array", @OA\Items(type="string")),
- *             @OA\Property(property="category_id", type="integer"),
+ *             @OA\Property(property="categoryId", type="integer"),
  *             example={
  *                 "title": "Bolo de Cenoura modificado",
  *                 "description": "Um bolo clássico, fofinho e delicioso.",
@@ -49,7 +49,7 @@ use Illuminate\Http\JsonResponse;
  *                 },
  *                 "preparation_time_minutes": 60,
  *                 "servings": 10,
- *                 "category_id": null
+ *                 "categoryId": null
  *             }
  *         )
  *     ),
@@ -64,7 +64,7 @@ use Illuminate\Http\JsonResponse;
  *             @OA\Property(property="ingredients", type="array", @OA\Items(type="string")),
  *             @OA\Property(property="steps", type="array", @OA\Items(type="string")),
  *             @OA\Property(property="user_id", type="string", example="1"),
- *             @OA\Property(property="category_id", type="integer", example=null),
+ *             @OA\Property(property="categoryId", type="integer", example=null),
  *             example={
  *                 "id": "1",
  *                 "title": "Bolo de Cenoura modificado",
@@ -85,7 +85,7 @@ use Illuminate\Http\JsonResponse;
  *                     "Despeje em uma forma untada e asse em forno médio por 40 minutos."
  *                 },
  *                 "user_id": "1",
- *                 "category_id": null
+ *                 "categoryId": null
  *             }
  *         )
  *     ),
@@ -114,7 +114,7 @@ final class EditRecipeController extends Controller
                 servings: $request->validated('servings'),
                 ingredients: $request->validated('ingredients'),
                 steps: $request->validated('steps'),
-                categoryId: $request->validated('category_id')
+                categoryId: $request->validated('categoryId')
             );
             $recipe = $this->useCase->execute($dto);
             return response()->json($recipe);

@@ -19,7 +19,7 @@ class CreateRecipeRequest extends FormRequest
             'servings' => 'nullable|integer|min:0',
             'ingredients' => 'nullable|array',
             'steps' => 'required|array',
-            'category_id' => 'nullable|integer|exists:categories,id',
+            'categoryId' => 'nullable|integer|exists:categories,id',
         ];
     }
 }

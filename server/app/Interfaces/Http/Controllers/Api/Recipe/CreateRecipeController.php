@@ -18,14 +18,14 @@ use Illuminate\Http\JsonResponse;
  *     @OA\RequestBody(
  *         required=true,
  *         @OA\JsonContent(
- *             required={"title", "category_id"},
+ *             required={"title", "categoryId"},
  *             @OA\Property(property="title", type="string"),
  *             @OA\Property(property="description", type="string"),
  *             @OA\Property(property="preparation_time_minutes", type="integer"),
  *             @OA\Property(property="servings", type="integer"),
  *             @OA\Property(property="ingredients", type="array", @OA\Items(type="string")),
  *             @OA\Property(property="steps", type="array", @OA\Items(type="string")),
- *             @OA\Property(property="category_id", type="integer"),
+ *             @OA\Property(property="categoryId", type="integer"),
  *             example={
  *                 "title": "Novo Bolo de Cenoura",
  *                 "description": "Um bolo clássico, fofinho, delicioso e bem colorido.",
@@ -45,7 +45,7 @@ use Illuminate\Http\JsonResponse;
  *                 },
  *                 "preparation_time_minutes": 60,
  *                 "servings": 10,
- *                 "category_id": null
+ *                 "categoryId": null
  *             }
  *         )
  *     ),
@@ -74,7 +74,7 @@ final class CreateRecipeController extends Controller
                 ingredients: $request->ingredients,
                 steps: $request->steps,
                 userId: $request->user()->id,
-                categoryId: $request->category_id,
+                categoryId: $request->categoryId,
             );
             $outputDTO = $useCase->execute($inputDTO);
             return response()->json($outputDTO, 200);

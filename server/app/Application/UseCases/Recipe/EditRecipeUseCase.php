@@ -35,7 +35,7 @@ final class EditRecipeUseCase implements EditRecipeUseCaseInterface
             ingredients: $recipe->ingredients,
             steps: $recipe->steps,
             user_id: $recipe->user->id,
-            category_id: $recipe->category->id
+            categoryId: $recipe->category->id
         );
     }
 }

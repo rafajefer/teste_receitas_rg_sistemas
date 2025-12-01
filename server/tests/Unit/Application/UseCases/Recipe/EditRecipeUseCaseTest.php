@@ -67,6 +67,6 @@ class EditRecipeUseCaseTest extends TestCase
         $this->assertEquals(['Farinha', 'Ovo', 'Cenoura'], $result->ingredients);
         $this->assertEquals(['Misture tudo', 'Asse por 45 minutos'], $result->steps);
         $this->assertEquals('1', $result->user_id);
-        $this->assertEquals('3', $result->category_id);
+        $this->assertEquals('3', $result->categoryId);
     }
 }

@@ -12,6 +12,6 @@ final class EditRecipeOutputDTO
         public readonly ?array $ingredients,
         public readonly array $steps,
         public readonly string $user_id,
-        public readonly ?string $category_id,
+        public readonly ?string $categoryId,
     ) {}
 }
