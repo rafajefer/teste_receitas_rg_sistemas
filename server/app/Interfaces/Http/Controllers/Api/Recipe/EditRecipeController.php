@@ -106,16 +106,26 @@ final class EditRecipeController extends Controller
 
     public function __invoke(string $id, EditRecipeRequest $request): JsonResponse
     {
-        $dto = new EditRecipeInputDTO(
-            id: $id,
-            title: $request->validated('title'),
-            preparationTimeMinutes: $request->validated('preparationTimeMinutes'),
-            servings: $request->validated('servings'),
-            ingredients: $request->validated('ingredients'),
-            steps: $request->validated('steps'),
-            categoryId: $request->validated('category_id')
-        );
-        $recipe = $this->useCase->execute($dto);
-        return response()->json($recipe);
+        try {
+            $dto = new EditRecipeInputDTO(
+                id: $id,
+                title: $request->validated('title'),
+                preparationTimeMinutes: $request->validated('preparationTimeMinutes'),
+                servings: $request->validated('servings'),
+                ingredients: $request->validated('ingredients'),
+                steps: $request->validated('steps'),
+                categoryId: $request->validated('category_id')
+            );
+            $recipe = $this->useCase->execute($dto);
+            return response()->json($recipe);
+        } catch (\DomainException $e) {
+            return response()->json([
+                'error' => 'Erro de domínio: ' . $e->getMessage(),
+            ], 400);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'error' => 'Erro interno do servidor.',
+            ], 500);
+        }
     }
 }

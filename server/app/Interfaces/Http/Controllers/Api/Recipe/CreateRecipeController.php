@@ -62,7 +62,7 @@ use Illuminate\Http\JsonResponse;
  *    )
  *)
  */
-class CreateRecipeController extends Controller
+final class CreateRecipeController extends Controller
 {
     public function __invoke(CreateRecipeRequest $request, CreateRecipeUseCase $useCase): JsonResponse
     {

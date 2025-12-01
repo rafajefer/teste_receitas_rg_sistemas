@@ -42,7 +42,17 @@ final class DeleteRecipeController extends Controller
 
     public function __invoke(string $id): JsonResponse
     {
-        $this->deleteRecipeUseCase->execute($id);
-        return response()->json(['message' => 'Receita removida com sucesso.']);
+        try {
+            $this->deleteRecipeUseCase->execute($id);
+            return response()->json(['message' => 'Receita removida com sucesso.']);
+        } catch (\DomainException $e) {
+            return response()->json([
+                'error' => 'Erro de domínio: ' . $e->getMessage(),
+            ], 400);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'error' => 'Erro interno do servidor.',
+            ], 500);
+        }
     }
 }

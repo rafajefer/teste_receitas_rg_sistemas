@@ -2,9 +2,6 @@
 
 namespace App\Interfaces\Http\Controllers\Api\Auth;
 
-use App\Application\UseCases\Auth\LogoutUserUseCase;
-use Illuminate\Http\JsonResponse;
-
 /**
  * @OA\Post(
  *     path="/api/auth/logout",
@@ -28,13 +25,26 @@ use Illuminate\Http\JsonResponse;
  * )
  */
 
+use App\Interfaces\Http\Controllers\Controller;
+use App\Application\UseCases\Auth\LogoutUserUseCase;
+use Illuminate\Http\JsonResponse;
 
-class LogoutUserController
+final class LogoutUserController extends Controller
 {
     public function __invoke(LogoutUserUseCase $useCase): JsonResponse
     {
-        $tokenId = auth('sanctum')->user()?->currentAccessToken()?->id;
-        $useCase->execute($tokenId);
-        return response()->json(['message' => 'Logout realizado com sucesso']);
+        try {
+            $tokenId = auth('sanctum')->user()?->currentAccessToken()?->id;
+            $useCase->execute($tokenId);
+            return response()->json(['message' => 'Logout realizado com sucesso']);
+                } catch (\DomainException $e) {
+            return response()->json([
+                'error' => 'Erro de domínio: ' . $e->getMessage(),
+            ], 400);
+        } catch (\Throwable $e) {
+            return response()->json([
+                'error' => 'Erro interno do servidor.',
+            ], 500);
+        }
     }
 }
