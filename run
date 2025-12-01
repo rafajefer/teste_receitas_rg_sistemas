@@ -24,13 +24,13 @@ if [ "$1" == "install" ] ; then
 
 
     cp server/.env.example server/.env
-    docker compose exec server php artisan key:generate
 
     echo -e "${GREEN}Installing server dependencies...${RESET}"
     docker compose exec server composer install
     echo -e "${GREEN}Server dependencies installed successfully.${RESET}\n"
 
     docker compose exec server php artisan migrate:fresh --seed
+    docker compose exec server php artisan key:generate
     docker compose exec server php artisan l5-swagger:generate
 
     echo -e "${GREEN}Installing client dependencies...${RESET}"

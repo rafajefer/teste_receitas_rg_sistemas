@@ -101,20 +101,21 @@ client/
 	cp server/.env.example server/.env
 	```
 	```bash
-	docker compose exec server php artisan key:generate
-	```
-	```bash
 	docker compose exec server composer install
 	```
 	3. Rodar migrações e popular banco de dados:
 	```bash
 	docker compose exec server php artisan migrate:fresh --seed
 	```
-	4. Gerar documentação Swagger da API:
+	4. Gerar chave de aplicação Laravel:
+	```bash
+	docker compose exec server php artisan key:generate
+	```
+	5. Gerar documentação Swagger da API:
 	```bash
 	docker compose exec server php artisan l5-swagger:generate
 	```
-	5. Instalar dependências do frontend:
+	6. Instalar dependências do frontend:
 	```bash
 	cp client/.env.sample client/.env
 	```
