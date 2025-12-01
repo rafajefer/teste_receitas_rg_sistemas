@@ -131,7 +131,7 @@ client/
 	 		- Login: `admin`
 	 		- Senha: `123456`
 	- Backend/API: [http://localhost:8000](http://localhost:8000)
-	- Documentação Swagger: [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation)
+	- Documentação Swagger: [http://localhost:8000/api/documentation](http://localhost:8000/api/documentation)
 	- phpMyAdmin: [http://localhost:8001](http://localhost:8001)
 	  - Usuário: `root`
 	  - Senha: `root`
@@ -358,6 +358,6 @@ MIT
 
 A documentação interativa da API está disponível em:
 
-[Swagger UI](http://localhost:8080/api/documentation)
+[Swagger UI](http://localhost:8000/api/documentation)
 
 > Acesse para visualizar, testar endpoints e validar contratos da API.
