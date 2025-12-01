@@ -126,6 +126,9 @@ client/
 
 4. Acessar API, SPA e phpMyAdmin:
 	- Frontend: [http://localhost:3000](http://localhost:3000)
+	 	- Usuário padrão de teste:
+	 		- Login: `admin`
+	 		- Senha: `123456`
 	- Backend/API: [http://localhost:8000](http://localhost:8000)
 	- Documentação Swagger: [http://localhost:8080/api/documentation](http://localhost:8080/api/documentation)
 	- phpMyAdmin: [http://localhost:8001](http://localhost:8001)
@@ -159,7 +162,7 @@ curl -X POST http://localhost:8000/api/auth/register \
 	-H "Content-Type: application/json" \
 	-d '{
 		"name": "Rafael",
-		"email": "rafael@email.com",
+		"login": "rafael123",
 		"password": "senha123",
 		"password_confirmation": "senha123"
 	}'
@@ -170,7 +173,7 @@ curl -X POST http://localhost:8000/api/auth/register \
 curl -X POST http://localhost:8000/api/auth/login \
 	-H "Content-Type: application/json" \
 	-d '{
-		"email": "rafael@email.com",
+		"login": "rafael123",
 		"password": "senha123"
 	}'
 ```
