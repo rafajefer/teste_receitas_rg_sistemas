@@ -18,7 +18,7 @@ class RecipeModelFactory extends Factory
             'id_categorias' => rand(0, 1)
                 ? CategoryModel::inRandomOrder()->first()->id
                 : null,
-            'nome' => $this->faker->unique()->sentence(3),
+            'nome' => $this->faker->unique()->sentence(2),
             'tempo_preparo_minutos' => $this->faker->numberBetween(5, 120),
             'porcoes' => $this->faker->numberBetween(1, 10),
 
